@@ -97,3 +97,12 @@ google_analytics_tracking_id: UA-32980212-1
 
 # Facebook Like
 facebook_like: true
+
+# Octoflat theme navigation
+navigation:
+- text: Home
+  url: /index.html
+- text: Games
+  url: /games/index.html
+- text: About
+  url: /about/index.html
