@@ -1,0 +1,294 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <!-- <link rel="stylesheet" href="css/reset.css" /> -->
+    <link rel="stylesheet" href="css/master.css" />
+    <!-- <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Shadows+Into+Light" /> -->
+    <title>HyperMash - The Service Composition Platform for Us</title>
+    <script src="js/jquery.js"></script>
+    <!-- <script src="js/jquery.xdomainajax.js"></script> -->
+
+    <script src="js/kinetic.js"></script>
+    <script src="js/ixDbEz.js"></script>
+    <!-- <script id="ajax_cross_domain_script" src="http://www.ajax-cross-domain.com/cgi-bin/ACD/ACD.js?"></script> -->
+</head>
+<body cellpadding="0" cellspacing="0" link="white" vlink="white" onload="initialise(); initialiseBigCanvas();">    
+<output id="temp_script_output"></output>
+<script>
+    var welcomeInfo = 'Welcome to HyperMash - the service composition platform for us.<br/><br/>Due to the fact HyperMash is still under development, unexpected outputs or errors may be occurred at use time, yet we are working extremely hard to keep that possibility as low as possible. However, we apologize that we will not be responsible for any of the problems and unstables happened at use time as HyperMash is still at its very early stage (just like a testing version).<br/><br/>If you are unhappy with this you can close HyperMash by leaving this Web page. Otherwise, please click the below button to accept the agreement.';
+
+    $(document).ready(function() {
+        visibleElement('dashboard');
+        visibleElement('dashboard_div');
+        $('#dashboard_output').html('<div>INFORMATION AND AGREEMENT</div><hr/><table class="frame_class"><tr><td><div class="scrollable_div" style="height: 85%;background:grey;">' + welcomeInfo + '</div></td></tr><tr><td align="center"><div class="div_long_push_button" onclick="invisibleElement(\'dashboard\');invisibleElement(\'dashboard_div\');">I agree</div></td></tr></table>');
+    });
+
+    // add iOS supports
+    $('.top_sidebar_frame').bind('touchstart', function() {
+        $(this).addClass('hover');
+        visibleElement('dashboard');
+    }).bind('touchend', function() {
+    $(this).removeClass('hover');
+    invisibleElement('dashboard');
+    });
+
+    $('.bottom_sidebar_frame').bind('touchstart', function() {
+        $(this).addClass('hover');
+        visibleElement('dashboard');
+    }).bind('touchend', function() {
+    $(this).removeClass('hover');
+    invisibleElement('dashboard');
+    });
+
+
+    function parseXML(xml) {
+        var data = $(xml).find("Result");
+        alert($(data).find("latitude").text());
+        // $(xml).find("Result").each(function() {
+        //     var msg = $(this).find("latitude").text() + ":" + $(this).find("longitude").text();
+        //     alert(msg);
+        // }
+        // );
+    }
+
+    function testWebPy() {
+        // var url = 'https://www.googleapis.com/books/v1/volumes?key=AIzaSyDY-vLXhwOduPlgHD2tqbtmBVboxsOns6g&q=HTML5%20for%20Web%20Designer';
+        // var url = 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=restaurants%20LE2%207GF&sensor=true&key=AIzaSyDY-vLXhwOduPlgHD2tqbtmBVboxsOns6g';
+        // var url = 'http://127.0.0.1:8080/Feifei Hang';
+        var url = 'http://maps.googleapis.com/maps/api/staticmap?center=M139NT&zoom=15&size=600x300&maptype=roadmap&sensor=true';
+
+
+        // $.put(url, function(data) {
+        //     data = (eval('(' + data + ')'));
+        //             alert(data.message);
+            // data = (eval('(' + data.responseText + ')'));
+                // for(var item in data.results) {
+                //     alert(item['name']);
+                //}
+        // });
+
+        var result = '';
+        $.ajax({
+                url: url,
+                type: 'POST',
+                async: false,
+                success: function(data) {
+                    // data = (eval('(' + data + ')'));
+                    result = data;
+                    // alert(result);
+                }
+        });
+
+        visibleElement('serviceBoard');
+        visibleElement('serviceBoard_div');
+        $('#serviceBoard_output').html(result);
+        // alert('CHECK: ' + result);
+
+        // var req = new XMLHttpRequest();
+        // req.onload = function() {
+        //     var data = (eval('(' + req.responseText + ')'));
+        //     for (var key in data) {
+        //         alert(key);
+        //     }
+        // }
+        // req.open('GET', url, true);
+        // req.send();
+
+        // var iframeforAjax = document.querySelector('#iframeforAjax').contentWindow;
+        // iframeforAjax.postMessage(url, '*');
+
+//         $.ajax({
+//                 url: url,
+//                 type: 'GET',
+//                 dataType: 'json',
+//                 success: function(data) {
+//                     for (var key in data) {
+//                         alert(key);
+//                     }
+//                 }
+//         });
+    }
+
+    function testLoad() {
+        var data = '{\"feeds\":[ {\"feed\":[{\"next\":\"1\", \"id\":\"1\", \"name\":\"Online Media\", \"type\":\"rest\", \"restUrl\":\"http://localhost:8080/media/\", \"restMethod\":\"get\" }]}, {\"feed\":[{\"next\":\"2\", \"id\":\"2\", \"name\":\"HTML5 Audio\", \"type\":\"widget\", \"restUrl\":\"undefined\", \"restMethod\":\"undefined\" }]}, {\"feed\":[{\"next\":\"-1\"}]}]}';
+        // var data = '{\"feeds\":[ {\"feed\":[{\"next\":\"1\", \"id\":\"1\", \"name\":\"UoM Events\", \"type\":\"rest\", \"restUrl\":\"http://localhost:8080/event/\", \"restMethod\":\"get\" }]}, {\"feed\":[{\"next\":\"2\", \"id\":\"2\", \"name\":\"UoM Address List\", \"type\":\"rest\", \"restUrl\":\"http://localhost:8080/geocode/\", \"restMethod\":\"get\" }]}, {\"feed\":[{\"next\":\"3\", \"id\":\"3\", \"name\":\"Google Map\", \"type\":\"rest\", \"restUrl\":\"http://maps.google.co.uk/maps?f=q&source=s_q&hl=en&geocode=&output=embed&t=h&ie=UTF8&aq=0\", \"restMethod\":\"get\" }]}, {\"feed\":[{\"next\":\"-1\"}]}]}';
+        loadFromJSON(data);
+    }
+
+    function testRest() {
+        var url = 'http://where.yahooapis.com/geocode?q=Grafton+street+Manchester+UK';
+
+        var req = new XMLHttpRequest();
+        req.onload = function() {
+            parseXML(req.responseText);
+        }
+        req.open("GET", url, true);
+        req.send(null);
+
+        // $.getJSON(url, function(data) {
+        //     alert(data.responseText);
+        // });
+
+        $.ajax({
+                url: url,
+                type: 'GET',
+                dataType: 'json',
+                success: function(res) {
+                    alert(res.responseText);
+                }
+        });
+    }
+</script>
+    <!-- head links -->
+    <div id="head_links">
+        <table border="0" cellpadding="0" cellspacing="0"><tr>
+                <td>
+                    <!-- <div class="head_links_button" onclick="testRest()">element</div> -->
+                    <div class="head_links_button" onclick="readProjects('options_field_output')">Open...</div>
+                    <div class="head_links_button" onclick="showSaveProjectDialog();">Save...</div>
+                    <!-- <div class="head_links_button" onclick="testWebPy()">element</div> -->
+                    <div class="head_links_button" onclick="showExecuteInputForm()">Run</div>
+                </td>
+            </tr></table>
+    </div>
+
+    <!-- the top menu bar -->
+    <div id="top_bar">
+        <table class="frame_table" border="0" cellpadding="0">
+            <tr><td>
+                    <div class="top_bar_button">element</div>
+                    <div class="top_bar_button">element</div>
+                    <div class="top_bar_button">element</div>
+            </td></tr>
+            <tr><td>
+                    <div class="top_bar_button">element</div>
+                    <div class="top_bar_button">element</div>
+                    <div class="top_bar_button">element</div>
+            </td></tr>
+        </table>
+    </div>
+
+    <!-- service board -->
+    <div id="serviceBoard" class="serviceBoard">
+        <table class="frame_table" border="0">
+            <tr><td style="width: 15%;"></td>
+            <td>
+                <table class="frame_table" border="0">
+                    <tr style="height: 5%;"></tr>
+                    <tr><td style="vertical-align: top;"><div id="serviceBoard_div" class="serviceBoard_div"><output id="serviceBoard_output"></output></div></td></tr>
+                    <tr style="height: 5%;"></tr>
+                </table>
+            </td>
+            <td style="width: 15%;"></td></tr>
+        </table>        
+    </div>
+
+    <!-- dashboard -->
+    <div id="dashboard" class="dashboard">
+        <table class="frame_table" border="0">
+            <tr><td style="width: 25%;"></td>
+            <td>
+                <table class="frame_table" border="0">
+                    <tr style="height: 20%;"></tr>
+                    <tr><td style="vertical-align: top;"><div id="dashboard_div" class="dashboard_div"><output id="dashboard_output"></output></div></td></tr>
+                    <tr style="height: 20%;"></tr>
+                </table>
+            </td>
+            <td style="width: 25%;"></td></tr>
+        </table>
+    </div>
+
+    <!-- top sidebar -->
+    <table class="top_sidebar_frame" border="0" cellpadding="2px;" onmouseover="visibleElement('dashboard')" onmouseout="invisibleElement('dashboard')">
+        <tr><td><div class="sidebar_button" onclick="resetCurrentPlace();showFeedsPanel('options_field_output');">Feeds</div></td>
+            <tr><td><div class="sidebar_button">Workers</div></td>
+                <tr><td><div class="sidebar_button" onclick="resetCurrentPlace();showWidgetsPanel('options_field_output');">Widgets</div></td>
+        </tr>
+    </table>
+
+    <!-- bottom sidebar -->
+    <table class="bottom_sidebar_frame" border="0" cellpadding="2px;" onmouseover="visibleElement('dashboard')" onmouseout="invisibleElement('dashboard')">
+        <tr><td><div class="sidebar_button">element</div></td>
+        <tr><td><div class="sidebar_button">element</div></td>
+        </tr>
+    </table>
+
+    <!-- sidebar information -->
+    <div class="top_sidebar_information">Platter</div>
+    <div class="bottom_sidebar_information">information</div>
+
+
+    <!-- master table -->
+    <table id="master_table" class="frame_table" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+            <td id="left_sidebar" class="master_table_margin"></td>
+            <td id="options_field"><div id="options_field_scrollable_div" class="scrollable_div" ><output id="options_field_output">
+                    <!-- options field output -->
+<!-- <table style="width: 100%;"> -->
+<!--     <tr><td>                    <input type="TEXT" class="input_box"/></td></tr> -->
+<!-- <tr><td>                    <div class="div_push_button">Push button</div></td></tr> -->
+<!--     <tr><td>                    <input type="TEXT" class="input_box"/></td></tr> -->
+<!-- <tr><td>                    <div class="div_push_button">Push button</div></td></tr> -->
+<!--     <tr><td>                    <input type="TEXT" class="input_box"/></td></tr> -->
+<!-- <tr><td>                    <div class="div_push_button">Push button</div></td></tr> -->
+<!--     <tr><td>                    <input type="TEXT" class="input_box"/></td></tr> -->
+<!-- <tr><td>                    <div class="div_push_button">Push button</div></td></tr> -->
+<!--     <tr><td>                    <input type="TEXT" class="input_box"/></td></tr> -->
+<!-- <tr><td>                    <div class="div_push_button">Push button</div></td></tr> -->
+<!--     <tr><td>                    <input type="TEXT" class="input_box"/></td></tr> -->
+<!-- <tr><td>                    <div class="div_push_button">Push button</div></td></tr> -->
+<!--     <tr><td>                    <input type="TEXT" class="input_box"/></td></tr> -->
+<!-- <tr><td>                    <div class="div_push_button">Push button</div></td></tr> -->
+<!--     <tr><td>                    <input type="TEXT" class="input_box"/></td></tr> -->
+<!-- <tr><td>                    <div class="div_push_button">Push button</div></td></tr> -->
+<!--     <tr><td>                    <input type="TEXT" class="input_box"/></td></tr> -->
+<!-- <tr><td>                    <div class="div_push_button">Push button</div></td></tr> -->
+<!--     <tr><td>                    <input type="TEXT" class="input_box"/></td></tr> -->
+<!-- <tr><td>                    <div class="div_push_button">Push button</div></td></tr> -->
+<!--     <tr><td>                    <input type="TEXT" class="input_box"/></td></tr> -->
+<!-- <tr><td>                    <div class="div_push_button">Push button</div></td></tr> -->
+<!--     <tr><td>                    <input type="TEXT" class="input_box"/></td></tr> -->
+<!-- <tr><td>                    <div class="div_push_button">Push button</div></td></tr> -->
+<!--     <tr><td>                    <input type="TEXT" class="input_box"/></td></tr> -->
+<!-- <tr><td>                    <div class="div_push_button">Push button</div></td></tr> -->
+<!-- </table> -->
+
+                </output></div><div id="properties_panel_div" class="scrollable_div">
+                    <output id="properties_panel_output">
+                    <!--properties panel-->
+<center>
+<!-- <a href="http://www.w3.org/html/logo/"> -->
+<!-- <img src="http://www.w3.org/html/logo/badge/html5-badge-h-css3-graphics-performance-storage.png" width="229" height="64" alt="HTML5 Powered with CSS3 / Styling, Graphics, 3D &amp; Effects, Performance &amp; Integration, and Offline &amp; Storage" title="HTML5 Powered with CSS3 / Styling, Graphics, 3D &amp; Effects, Performance &amp; Integration, and Offline &amp; Storage"> -->
+<!-- </a> -->
+    <!-- <img src="img/html5_logo.png" alt="HTML5 logo" style="margin-top: 10%;" width="50%" height="30%"/> -->
+    <img src="img/crest.png" alt="University of Manchester Crest" style="margin-top: 5%;" width="40%" height="80%"/>
+</center>
+                    </output>
+                </div></td>
+
+        <td id="big_canvas">
+                <!-- <output id="big_canvas_output"> -->
+                <!-- big canvas output -->
+                    <div id="big_canvas_canvas"></div>
+                <!-- </output> -->
+            </td>
+            <!-- <td id="right_sidebar" class="master_table_margin"></td> -->
+
+            <td style="width: 0.5%; background: #555555;"></td>
+        </tr>
+
+    </table>
+
+    <!-- footer & copyright information -->
+    <footer><div>&copy; 2012 Feifei Hang, Univeristy of Manchester</div></footer>
+
+
+    <!-- scripts here -->
+    <script src="js/main_events.js"></script>
+    <script src="js/big_canvas_events.js"></script>
+    <script src="js/servicesComposer.js"></script>
+    <script src="js/widget.js"></script>
+    <script src="js/md5.js"></script>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+    <title>Adventure Land of HTML5</title>
+    <style type="text/css" media="screen">
+        html {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background: black;
+            font-family: sans-serif;
+        }
+
+        .frame {
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+        }
+
+        .margin {
+            width: 10%;
+        }
+
+        #container {
+            background: transparent;
+            width: 100%;
+            height: 80%;
+        }
+
+        #left_cell {
+            background: #005C83;
+            padding: 0;
+            margin: 0;
+            width: 50%;
+            height: 100%;
+            transition: width 2s;
+            -webkit-transition: width 2s;
+            -moz-transition: width 2s;
+            -o-transition: width 2s;
+        }
+
+        #left_cell:hover {
+            width: 70%;
+            background: #AAB000;
+        }
+
+        #top_right_cell {
+            background: #005C83;
+            padding: 0;
+            margin: 0;
+            height: 50%;
+            transition: height 2s;
+            -webkit-transition: height 2s;
+            -moz-transition: height 2s;
+            -o-transition: height 2s;
+        }
+
+        #top_right_cell:hover {
+            background: #AAB000;
+            height: 70%;
+        }
+
+        #home_button {
+            font-size: larger;
+            position: absolute;
+            z-index: 1;
+            cursor: pointer;
+            left: -85;
+            top: 50%;
+            width: 100px;
+            text-align: center;
+            vertical-align: middle;
+            background: #005C83;
+            color: white;
+            transition: all 1s ease-in-out;
+            -webkit-transition: all 1s ease-in-out;
+            -moz-transition: all 1s ease-in-out;
+            -o-transition: all 1s ease-in-out;
+        }
+
+        #home_button:hover {
+            background: #AAB000;
+            left:0;
+        }
+
+        #bottom_right_cell {
+            background: #005C83;
+            padding: 0;
+            margin: 0;
+            height: 50%;
+            text-align: center;
+            vertical-align: middle;
+            display: table-cell;
+            transition: all 1s;
+            -webkit-transition: all 1s;
+            -moz-transition: all 1s;
+            -o-transition: all 1s;
+        }
+
+        #bottom_right_cell:hover {
+            background: #AAB000;
+            transform:rotate(7deg);
+            -moz-transform:rotate(7deg); /* Firefox */
+            -webkit-transform:rotate(7deg); /* Safari and Chrome */
+            -o-transform:rotate(7deg); /* Opera */
+        }
+
+        .divs {
+            /* border: none; */
+            /* border-style: solid; */
+            color: white;
+            text-align: center;
+            vertical-align: middle;
+            /* display: table-cell; */
+            width: 100%;
+            height: 100%;
+        }
+
+        #foot {
+            float: right;
+            color: white;
+        } 
+
+    </style>
+</head>
+<script type="text/javascript" charset="utf-8">
+    var home_url = "http://feifeihang.github.com";
+    function backToHome() {
+        window.location.href = home_url;
+    }
+</script>
+<body link="white" vlink="white">
+    <!-- home button -->
+    <div id="home_button" onclick="backToHome()">Back to home</div>
+    <table class="frame" border="0"><tr>
+            <td class="margin"></td>
+            <td><div id="container">
+                    
+                    <!-- main UI components go here -->
+<table  class="frame" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td id="left_cell"><div id="lef_div" class="divs">
+            <!-- left cell -->
+            <img border="0" src="http://feifeihang.github.com/images/html5_logo.png" alt="HTML5" width="80%" height="90%" />
+            
+        </div></td>
+
+    <td style="width: 100%;">
+        <table class="frame" cellpadding="0" cellspacing="0">
+            <tr id="top_right_cell"><td><div id="top_right_div" class="divs">
+                        <!-- top right cell -->
+                        <img border="0" src="http://feifeihang.github.com/images/css3.png" alt="CSS3" width="50%" height="40%" />
+
+                    </div></td></tr>
+            <tr id="bottom_right_cell"><td><div id="bottom_right_div" class="divs">
+                        <!-- bottom right cell -->
+                        <div style="margin-left: 20;"><a href="http://feifeihang.github.com/html5/hSlides/index.html">hSlides</a> (please download and try this <a href="hSlides/example.html">example</a>.)</div>
+
+                    </div></td></tr>
+        </table>
+    </td>    
+
+    </tr>
+</table>
+
+
+            </div></td>
+            <td class="margin"></td>
+    </tr></table>
+<script type="text/javascript">
+
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-32980212-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,258 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+    <title>hSlides Pilot Platform</title>
+    <style type="text/css" media="screen">
+        body {
+            background: black;
+            font-family: sans-serif;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        footer {
+            position: absolute;
+            bottom 100;
+        }
+
+        section {
+            position: relative;
+            font-size: 25;
+            font-family: sans-serif;
+        }
+
+        .previews {
+            width: 2%;
+            /* padding: 10px; */
+            /* text-align: center; */
+            vertical-align: middle;
+            display: table-cell;
+        }
+
+        .button {
+            background: transparent;
+            color: white;
+            width: 100px;
+            height: 20px;
+            border: thin;
+            border-style: solid;
+            display: table-cell;
+
+            transition: width 2s;
+            -moz-transition: width 2s;
+            -webkit-transition: width 2s;
+            -o-transition: width 2s;
+
+            cursor: pointer;
+        }
+
+        .button:hover {
+            width: 150px;
+            /* height: 25%; */
+        }
+
+        .slide {
+            padding: 5px;
+            background: white;
+            margin: 2px;
+            width: 98%;
+            height: 95%;
+            border: thin;
+            border-style: solid;
+        }
+    </style>
+</head>
+<body>
+    <table style="width:100%; height:95%;" border="0"><tr style="width:100%; height:100%; background:transparent;">
+            <td class="previews">
+                <!-- <div class="preview" onclick="moveToPrevious()"> -->
+                <!-- previous slide's preview goes here -->
+                    <!-- <output id="previous_preview">Previous</output> -->
+                </div>
+            </td>
+            <td>
+                <div class="slide">
+                <!-- current slide -->
+                    <output id="current_slide">
+                        <table border="0" height="100%">
+                            <tr><td width="30%" height="100%"></td>
+                                <td style="text-align:center;">
+                                    <img alt="HTML5 Logo" src="html5_logo.png" width="80%" height="60%"/>
+                                </td>
+                                <td width="30%" height="100%"></td>
+                            </tr>
+                        </table>
+                    </output>
+                </div>
+            </td>
+            <td class="previews">
+                <!-- <div class="preview" id="next_preview">  -->
+                    <!-- next slide's preview goes here -->
+                    <!-- <output id="next_preview">Next</output> -->
+                </div>
+            </td>
+        </tr></table>
+    <div align="right" style="float: right; color:white; font-size: small; vertical-align:top; display: inline-table; text-align: center; margin-right: 30px;">
+        <input type="FILE" id="files" multiple="multiple" name="files[]" accept="image" required="required" title="Please choose at least one file"/> Page #: <span id='current_page'>???</span> / <span id="total_pages">???</span>&nbsp;&nbsp;&nbsp;<div class="button" onclick="moveToPrevious()">Backward</div>&nbsp;<div class="button" onclick="moveToNext()">Forward</div>
+    </div>
+    
+
+
+    <script>
+        var code, sections; // variables for storing the entire source file and each section of a hSlide
+        var counter = 0, starter = 0; // counter for page number
+
+        var NO_MORE = '<div style="font-size: smaller; background: #888; color: white; width: 100%; height:100%; border-radius: 5px;">&nbsp;No more.</div>';
+
+        document.onkeydown = function(e) {
+            var keyCode;
+
+            if(e == null) {
+                keyCode = window.event.keyCode;
+            } else {
+                keyCode = e.keyCode;
+            }
+
+            switch(keyCode) {
+                case 37:
+                    moveToPrevious();
+                    break;
+
+                case 39:
+                    moveToNext();
+                    break;
+
+                case 84:
+                    window.location.href = "http://www.google.com";
+                    break;
+
+                default:
+                    break;
+
+            }
+        }
+
+        function handleFileSelect(evt) {
+            var files = evt.target.files;
+            iterateFiles(files);
+        }
+
+        function iterateFiles(files) {
+            var output = [];
+            for(var index = 0, file; file = files[index]; ++index) {
+                readFile(file);
+            }
+        }
+
+        function readFile(filename) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                code = e.target.result;
+                splitBySection(code);
+            };
+            reader.readAsText(filename, "UTF-8");
+        }
+
+        function setPageNumber(page_number) {
+            document.getElementById('current_page').innerHTML = page_number;
+        }
+
+        function resetCounter(total_pages) {
+            counter = 0;
+            starter = 0;
+            setPageNumber(counter + 1);
+            document.getElementById('total_pages').innerHTML = total_pages;
+        }
+
+        function splitBySection(source_code) {
+            // check if the source code is valid
+            if(source_code.indexOf("<section>") != -1 && source_code.indexOf("</section>" != -1)) {
+                sections = source_code.split("<section>");
+                checkSections(sections);
+                resetCounter(sections.length);
+
+                if(sections[0] == '') {
+                    resetCounter(sections.length - 1);
+                    ++counter;
+                    ++starter;
+                }
+
+                showCurrentSlide();
+            } else {
+                alert("Invalid hSlide source file. Please try again.");
+                alert(source_code);
+            }
+        }
+
+        function checkSections(sections) {
+            for(var index = 0; index != sections.length; ++index) {
+                if(sections[index].indexOf("</section>") == -1) {
+                    removeByIndex(sections, index);
+                    --index;
+                }
+            }
+        }
+
+        function showCurrentSlide() {
+            document.getElementById('current_slide').innerHTML = "<section>\n" + sections[counter];
+            // showPreviousPreview();
+            // showNextPreview();
+            setPageNumber(counter + 1);
+        }
+
+        function showPreviousPreview() {
+            var pre = document.getElementById('previous_preview');
+            if(counter == starter) {
+                // pre.innerHTML = NO_MORE;
+            } else {
+                pre.innerHTML = "<section>\n" + sections[counter - 1];
+            }
+        }
+
+        function showNextPreview() {
+            var pre = document.getElementById('next_preview');
+            if(counter == sections.length - 1) {
+                // pre.innerHTML = NO_MORE;
+            } else {
+                pre.innerHTML = "<section>\n" + sections[counter + 1];
+            }
+        }
+
+        function moveToNext() {
+            if(counter < sections.length - 1) {
+                ++counter;
+                showCurrentSlide();
+            }
+        }
+
+        function moveToPrevious() {
+            if(counter > starter) {
+                --counter;
+                showCurrentSlide();
+            }
+        }
+
+        function removeByIndex(arrayName, index) {
+            arrayName.splice(index, 1);
+        }
+
+        document.getElementById('files').addEventListener('change', handleFileSelect, false);
+    </script>
+<script type="text/javascript">
+
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-32980212-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+---
+layout: post
+title: "WSDL2Java"
+date: 2012-04-06 15:02
+comments: true
+categories: 
+---
+As an increasingly important area, Service-Oriented Architecture (SOA) has finally caught my eyes on it, although I did take a module about it during my MSc degree. It is really hard to say if I will learn to build my own Web Service in near future, but I do get lots of fun from “service composition”. For example, you can get cities’ name by using “Postcode – Location” converter, and then use them in a “Location – Weather” forecaster to get the weather forecasts. And the best thing is that you DO NOT need to do anything on building the “converter” or “forecaster”, because you can just directly use them since they are published as Web Services.
+
+<!--more-->
+Indeed, before building service-oriented applications, we do need to learn a bit about SOA. Because I am not entirely familiar with SOA yet, it should be better if I just touch its surface here. 
+
+Generally, each published web service is described by a WSDL file. WSDL stands for “Web Service Definition Language”, and it describes the information of the web service. Hence when you want to use an existing web service, you need to get its WSDL firstly. Normally, you can find WSDL file by simply adding “?WSDL” at end of web services’ URL. For example, if the web service is at “http://www.soa.com/service.asm”, the WSDL file will be “http://www.soa.com/service.asm?WSDL”.
+
+Another important concept is SOAP. SOAP stands for “Simple Object Access Protocol”. As can be easily figured out form its name, SOAP is basically a protocol for object accesses and communications. At this time point, you just need to remember that we usually need SOAP for accessing web services.
+
+So far, we are almost there to build our service-oriented applications. But before that, there is one more step. If you prefer to develop applications in Java (just like me), you need to generate Java files of the web services from WSDL before building your very own one. I noticed that there are so many ways to generate Java from WSDL, especially when you using IDEs. However, because I prefer to use text-based Vim to develop applications, the following “WDSL2Java” command line is what I use frequently:
+
+wsimport
+
+Now, suppose that the WSDL is “http://www.soa.com/service.asm?WSDL”, then you just need:
+
+{% codeblock lang:bash %}
+wsimport -keep -verbose http://www.soa.com/service.asm?WSDL
+{% endcodeblock %}
+
+Now you can start to build your own service-oriented applications by using the generated Java classes from the desired WSDL. 
+
+Cheers!!!
+
+Feifei
+
