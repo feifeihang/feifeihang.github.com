@@ -58,10 +58,13 @@ default_asides: [asides/clock.html, asides/recent_posts.html, asides/github.html
 # ----------------------- #
 
 # Github repositories
-github_user:
+github_user: hufyhang
 github_repo_count: 0
 github_show_profile_link: true
 github_skip_forks: true
+
+# Linkedin
+linkedin_user: feifeihang
 
 # Twitter
 twitter_user:
@@ -102,7 +105,9 @@ facebook_like: true
 navigation:
 - text: Home
   url: /index.html
+- text: Archives
+  url: /blog/archives/index.html
 - text: Games
   url: /games/index.html
-- text: About
+- text: About Me
   url: /about/index.html
