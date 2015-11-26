@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="report,web," />
+  <meta name="keywords" content="javascript," />
 
 
 
@@ -51,16 +51,16 @@
 
 
 
-<meta name="description" content="In social science, boundary objects are being defined as “the objects that cross the boundaries between multiple social worlds“. A concrete example in real life is “library”. In a library, the readers">
+<meta name="description" content="The ProblemRecently, I am working on a new website for a client. The client expects, in short, a postcode-based search box as one of the core features of the new landing page. Since it is postcode bas">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Web: The Boundary Object for People">
-<meta property="og:url" content="http://feifeihang.github.io/2012/06/07/web-the-boundary-object-of-people/index.html">
+<meta property="og:title" content="JavaScript setTimeout">
+<meta property="og:url" content="http://feifeihang.github.io/2015/11/26/JavaScript-setTimeout/index.html">
 <meta property="og:site_name" content="FEIFEI HANG'S BLOG">
-<meta property="og:description" content="In social science, boundary objects are being defined as “the objects that cross the boundaries between multiple social worlds“. A concrete example in real life is “library”. In a library, the readers">
-<meta property="og:updated_time" content="2015-11-25T11:37:18.000Z">
+<meta property="og:description" content="The ProblemRecently, I am working on a new website for a client. The client expects, in short, a postcode-based search box as one of the core features of the new landing page. Since it is postcode bas">
+<meta property="og:updated_time" content="2015-11-26T10:40:16.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Web: The Boundary Object for People">
-<meta name="twitter:description" content="In social science, boundary objects are being defined as “the objects that cross the boundaries between multiple social worlds“. A concrete example in real life is “library”. In a library, the readers">
+<meta name="twitter:title" content="JavaScript setTimeout">
+<meta name="twitter:description" content="The ProblemRecently, I am working on a new website for a client. The client expects, in short, a postcode-based search box as one of the core features of the new landing page. Since it is postcode bas">
 
 
 
@@ -72,7 +72,7 @@
   };
 </script>
 
-  <title> Web: The Boundary Object for People | FEIFEI HANG'S BLOG </title>
+  <title> JavaScript setTimeout | FEIFEI HANG'S BLOG </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -192,7 +192,7 @@
             
             
               
-                Web: The Boundary Object for People
+                JavaScript setTimeout
               
             
           </h1>
@@ -201,8 +201,8 @@
         <div class="post-meta">
           <span class="post-time">
             Posted on
-            <time itemprop="dateCreated" datetime="2012-06-07T15:14:00+08:00" content="2012-06-07">
-              2012-06-07
+            <time itemprop="dateCreated" datetime="2015-11-26T14:34:43+08:00" content="2015-11-26">
+              2015-11-26
             </time>
           </span>
 
@@ -225,18 +225,23 @@
       
 
       
-        <span itemprop="articleBody"><p>In social science, <strong>boundary objects</strong> are being defined as “<em>the objects that cross the boundaries between multiple social worlds</em>“. A concrete example in real life is “library”. In a library, the readers are from different social worlds, e.g. some of them are doing computer science while others are dedicating to business. As a repository of knowledge, the library brings us the opportunity to get along with others from different social worlds. Therefore the library is essentially acting as a boundary object between these social worlds.</p>
+        <span itemprop="articleBody"><h3 id="The_Problem">The Problem</h3><p>Recently, I am working on a new website for a client. The client expects, in short, a postcode-based search box as one of the core features of the new landing page. Since it is postcode based, the design decision is that the strings (i.e. postcodes) entered by users should be, ideally, always in upper case automatically.</p>
+<p>This task sounds pretty easy and straight forward, most people, including myself, will simply code like this:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=<span class="string">"text"</span> id=<span class="string">"postcode"</span> /&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript"></span><br><span class="line">    <span class="keyword">var</span> input = <span class="built_in">document</span>.getElementById(<span class="string">'postcode'</span>);</span><br><span class="line">    input.addEventListner(<span class="string">'keypress'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">evt</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.value = <span class="keyword">this</span>.value.toUpperCase();</span><br><span class="line">    &#125;);</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
 <a id="more"></a>
-<p>As the biggest artefact which has ever been built by humans, the <strong>Web</strong> (a.k.a. <strong>Internet</strong>) is also being developed followed the route proposed by <strong>Boundary Object Theory</strong> and its divisions. Based on the original Boundary Object Theory, Paul R. Carlile and et al. argued that a boundary object should be:</p>
-<ul>
-<li><em>Syntactic</em>: A boundary object should has its syntax in order to be represented. The word syntax here is a weak term, which can be interpreted as meta-models or constraints or even common-accepted facts. For example, the syntax of a library can be “a building that contains different categories of books inside.”.</li>
-<li><em>Semantic</em>: After being expressed based on the syntax, a boundary object should be able to be understood by the covered social worlds. For example, in business world, contracts can be described as the boundary objects between companies. Being semantic means that the contracts should be understood by the companies or any other participants which get involved in the contracts.</li>
-<li><em>Pragmatic</em>: In order to coordinate the involved social worlds efficiently, boundary objects should also be pragmatic, which means that the objects should be modifiable. For instance, when negotiating contract, the original contract should be changeable in order to allow the multiple parties to get a common-accepted balance.</li>
-</ul>
-<p>Looking at the history of web, it has strictly followed the above principles. When web was firstly introduced, people set standards and protocols to make it syntactic. In 1998, Tim Berners-Lee revealed the concept of Semantic Web, which essentially aims at, from the perspective of Boundary Object Theory, developing the web to be a semantic boundary object. In short, Semantic Web is going to make (the components on) the web understandable by machines which are also a part of the participants of the web. And in 1999, we welcomed the term Web 2.0, which brings the opportunity to all of us to modify and develop the web by ourselves. One of the typical examples of the Web 2.0 is the uses of blogs.</p>
-<p>To date, the web has <s>automatically</s> followed the route proposed by Boundary Object Theory. I cannot tell what is going to happen next, but I am sure that with the research and development of Boundary Object Theory, we will find the answer from it.</p>
-<p>Cheers!!!</p>
-<p>Feifei</p>
+<p>However, if you test the above code, you will realize that it does not take any effect. The season is that when <code>this.value = this.value.toUpperCase();</code> is being executed, the value of the postcode input has not been changed yet.</p>
+<p>Therefore, a dummy solution shown in the following code snippet seems solved the problem.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=<span class="string">"text"</span> id=<span class="string">"postcode"</span> /&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript"></span><br><span class="line">    <span class="keyword">var</span> input = <span class="built_in">document</span>.getElementById(<span class="string">'postcode'</span>);</span><br><span class="line">    input.addEventListner(<span class="string">'keyup'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">evt</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.value = <span class="keyword">this</span>.value.toUpperCase();</span><br><span class="line">    &#125;);</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>To be more nitpicking, you may notice the <strong>“visible”</strong> transform of lower case to upper case once you adopt the above solution. For me, it just looks clumsy and silly.</p>
+<h3 id="setTimeout_to_the_Rescue">setTimeout to the Rescue</h3><p>Basically, what we really like to see is a procedure like this:</p>
+<p>enter postcode -&gt; update input value -&gt; get current input value -&gt; toUpperCase -&gt; update UI</p>
+<p>Fortunately, a <code>setTimeout</code> trick, see the code blow, can get the above procedure easily implemented.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=<span class="string">"text"</span> id=<span class="string">"postcode"</span> /&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript"></span><br><span class="line">    <span class="keyword">var</span> input = <span class="built_in">document</span>.getElementById(<span class="string">'postcode'</span>);</span><br><span class="line">    input.addEventListner(<span class="string">'keypress'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">evt</span>) </span>&#123;</span><br><span class="line">        setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                <span class="keyword">this</span>.value = <span class="keyword">this</span>.value.toUpperCase();</span><br><span class="line">            &#125;.bind(<span class="keyword">this</span>), <span class="number">0</span>);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>Notice the second parameter <code>0</code> to <code>setTiemout</code>. This trick sequentially does the following magics:</p>
+<ol>
+<li>Pushes the anonymous callback function to the callback queue.</li>
+<li>Once the current execution stack is empty, the early queued callback function will get executed <del>immediately</del> pretty soon.</li>
+</ol>
 </span>
       
     </div>
@@ -245,9 +250,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/report/" rel="tag">#report</a>
-          
-            <a href="/tags/web/" rel="tag">#web</a>
+            <a href="/tags/javascript/" rel="tag">#javascript</a>
           
         </div>
       
@@ -256,17 +259,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2012/06/04/a-proposal-on-restful-web-services-modeling/" rel="next" title="A Proposal on RESTful Web Services Modeling">
-                <i class="fa fa-chevron-left"></i> A Proposal on RESTful Web Services Modeling
+              <a href="/2015/11/26/JavaScript-Closures/" rel="next" title="JavaScript Closures">
+                <i class="fa fa-chevron-left"></i> JavaScript Closures
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2012/06/16/a-restful-web-services-modeling-approach/" rel="prev" title="A RESTful Web Services Modeling Approach">
-                A RESTful Web Services Modeling Approach <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -398,7 +397,7 @@
               
             
             
-              <p class="post-toc-empty">This post does not have a Table Of Contents</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#The_Problem"><span class="nav-number">1.</span> <span class="nav-text">The Problem</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#setTimeout_to_the_Rescue"><span class="nav-number">2.</span> <span class="nav-text">setTimeout to the Rescue</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

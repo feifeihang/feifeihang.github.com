@@ -57,7 +57,7 @@
 <meta property="og:url" content="http://feifeihang.github.io/2014/01/27/javascript-promises-101/index.html">
 <meta property="og:site_name" content="FEIFEI HANG'S BLOG">
 <meta property="og:description" content="If you happened to learn or use Node.JS you should definitely heard about the word “Asynchronous”. This is extremely useful as in a single-thread environment just like Javascript we always want to ens">
-<meta property="og:updated_time" content="2015-11-25T11:38:39.000Z">
+<meta property="og:updated_time" content="2015-11-26T10:34:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Javascript Promises 101">
 <meta name="twitter:description" content="If you happened to learn or use Node.JS you should definitely heard about the word “Asynchronous”. This is extremely useful as in a single-thread environment just like Javascript we always want to ens">
@@ -227,6 +227,7 @@
       
         <span itemprop="articleBody"><p>If you happened to learn or use Node.JS you should definitely heard about the word “Asynchronous”. This is extremely useful as in a single-thread environment just like Javascript we always want to ensure that our programs will not be blocked by any expensive procedures at run-time. For example, like consider the below code segment:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> sql = <span class="string">'SELECT name FROM users'</span>;</span><br><span class="line"><span class="keyword">var</span> users = query(database, sql); <span class="comment">// suppose query returns an array</span></span><br><span class="line"><span class="built_in">console</span>.log(users.length);</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <p>This is a pretty traditional synchronous database querying procedure, which retrieves all the user names from database and the print the number of users in console. However, the second line could actually be a bad ass if the database contains tons of records or we happened to suffer from a slow network connection. Thereafter, our program will very likely to be blocked at the second line until it receives the result sending back from database.</p>
 <p>In Node.JS, we use a mechanism called “callback” to address this issue and change the above program into something like this:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> sql = <span class="string">'SELECT name FROM users'</span>;</span><br><span class="line">query(database, sql, <span class="function"><span class="keyword">function</span>(<span class="params">err, res</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!err) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(res.length);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
@@ -330,14 +331,14 @@
 
       <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Feifei Hang" itemprop="image"/>
+          <img class="site-author-image" src="/files/avatar.png" alt="Feifei Hang" itemprop="image"/>
           <p class="site-author-name" itemprop="name">Feifei Hang</p>
         </div>
         <p class="site-description motion-element" itemprop="description">A PhD candidate, passionates about Front-End Development.</p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-count">25</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -361,6 +362,24 @@
         
 
         <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://feifeihang.info" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Homepage
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hufyhang" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
           
         </div>
 
@@ -403,7 +422,7 @@
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy; 
+  &copy;  2012 - 
   <span itemprop="copyrightYear">2015</span>
   <span class="with-love">
     <i class="icon-next-heart fa fa-heart"></i>

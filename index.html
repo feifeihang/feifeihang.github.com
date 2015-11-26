@@ -177,6 +177,98 @@
 
     
     
+      
+      
+        
+        
+        
+      
+
+      
+    
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/11/26/JavaScript-setTimeout/" itemprop="url">
+                  JavaScript setTimeout
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            Posted on
+            <time itemprop="dateCreated" datetime="2015-11-26T14:34:43+08:00" content="2015-11-26">
+              2015-11-26
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h3 id="The_Problem">The Problem</h3><p>Recently, I am working on a new website for a client. The client expects, in short, a postcode-based search box as one of the core features of the new landing page. Since it is postcode based, the design decision is that the strings (i.e. postcodes) entered by users should be, ideally, always in upper case automatically.</p>
+<p>This task sounds pretty easy and straight forward, most people, including myself, will simply code like this:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=<span class="string">"text"</span> id=<span class="string">"postcode"</span> /&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript"></span><br><span class="line">    <span class="keyword">var</span> input = <span class="built_in">document</span>.getElementById(<span class="string">'postcode'</span>);</span><br><span class="line">    input.addEventListner(<span class="string">'keypress'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">evt</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.value = <span class="keyword">this</span>.value.toUpperCase();</span><br><span class="line">    &#125;);</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/11/26/JavaScript-setTimeout/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
 
     
       
@@ -236,29 +328,17 @@
 
       
         
-          <span itemprop="articleBody">
-            
-              <p>If you happen to program in JavaScript, you must have (sooner or later) came through one of the most allegedly confusing and hard understanding concept - closure. After reading several related posts, I try to explain this concept here in a dummy way.</p>
+          <p>If you happen to program in JavaScript, you must have (sooner or later) came through one of the most allegedly confusing and hard understanding concept - closure. After reading several related posts, I try to explain this concept here in a dummy way.</p>
 <h3 id="What_is_a_closure?">What is a closure?</h3><p>Closure is defined in several ways in the wild. Here are two of them that I personally like the most:</p>
 <ul>
 <li>A closure is <strong>an inner function</strong> that has <strong>access</strong> to the <strong>outer (enclosing) function’s variables</strong> – scope chain [1].</li>
 <li>A closure is the local variables of a function – <strong>kept alive after the function has returned</strong> [2].</li>
 </ul>
-<h3 id="Why_closure?">Why closure?</h3><p>Closure can be used in several scenarios. Below are its two major uses:</p>
-<h4 id="Accessing_outer/enclosing_function’s_variables">Accessing outer/enclosing function’s variables</h4><p>For example:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> num = <span class="number">100</span>;</span><br><span class="line">    <span class="keyword">var</span> inner = <span class="function"><span class="keyword">function</span> (<span class="params">n</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// Accessing `num` defined in enclosing function below.</span></span><br><span class="line">        num += n;</span><br><span class="line">        alert(num);</span><br><span class="line">    &#125;</span><br><span class="line">    alert(num);</span><br><span class="line">    <span class="keyword">return</span> inner;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> result = fn(); <span class="comment">// 100</span></span><br><span class="line">result(<span class="number">10</span>); <span class="comment">// 110</span></span><br><span class="line">result(<span class="number">10</span>); <span class="comment">// 120</span></span><br></pre></td></tr></table></figure>
-<h4 id="Keep_local_variables_alive_after_enclosing_function_returns">Keep local variables alive after enclosing function returns</h4><p>The last three lines of code show that even after <code>fn</code> returned, its local variable <code>num</code> is still alive. Consequently, <code>num</code> can be used as a cache in memory.</p>
-<h3 id="Side_Effects">Side Effects</h3><p>Closure will also lead to side effects if it is not used carefully enough. Bear in mind, <strong>closures store references to the outer function’s variables, so that they have access to the <em>updated</em> values of these variables.</strong></p>
-<h4 id="Problem">Problem</h4><p>Consider the following example taken from [2]:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">celebrityIDCreator</span> (<span class="params">theCelebrities</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> i;</span><br><span class="line">    <span class="keyword">var</span> uniqueID = <span class="number">100</span>;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; theCelebrities.length; i++) &#123;</span><br><span class="line">      theCelebrities[i][<span class="string">"id"</span>] = <span class="function"><span class="keyword">function</span> (<span class="params"></span>)  </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> uniqueID + i;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> theCelebrities;</span><br><span class="line">&#125;</span><br><span class="line">​<span class="keyword">var</span> actionCelebs = [&#123;name:<span class="string">"Stallone"</span>, id:<span class="number">0</span>&#125;, &#123;name:<span class="string">"Cruise"</span>, id:<span class="number">0</span>&#125;, &#123;name:<span class="string">"Willis"</span>, id:<span class="number">0</span>&#125;];</span><br><span class="line">​<span class="keyword">var</span> createIdForActionCelebs = celebrityIDCreator(actionCelebs);</span><br><span class="line">​<span class="keyword">var</span> stalloneID = createIdForActionCelebs[<span class="number">0</span>];</span><br><span class="line">alert(stalloneID.id()); <span class="comment">// 103</span></span><br></pre></td></tr></table></figure>
-<p>Instead of being 100, 101, 102, the <code>id</code>s of all three celebrities are all 103. This is because that after the for loop the value of <code>i</code> increased to 3, while closures accesses to the <em>updated</em> value of outer function’s variables, <code>return uniqueID + i</code> became <code>return 100 + 3</code> for each celebrity.</p>
-<h4 id="Solution">Solution</h4><p>Below is one of the possible fixes to address the bug shown in the above example. This solution utilizes Immediate Invoked Fucntion Expression (IIFE).</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">celebrityIDCreator</span> (<span class="params">theCelebrities</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> i;</span><br><span class="line">    <span class="keyword">var</span> uniqueID = <span class="number">100</span>;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; theCelebrities.length; ++i) &#123;</span><br><span class="line">        <span class="comment">// Pass `i` as a parameter to IIFE.</span></span><br><span class="line">        theCelebrities[i][<span class="string">'id'</span>] = (<span class="function"><span class="keyword">function</span> (<span class="params">j</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> uniqueID + j;            </span><br><span class="line">        &#125;)(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> theCelebrities;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> actionCelebs = [&#123;name:<span class="string">'Stallone'</span>, id:<span class="number">0</span>&#125;, &#123;name:<span class="string">'Cruise'</span>, id:<span class="number">0</span>&#125;, &#123;name:<span class="string">'Willis'</span>, id:<span class="number">0</span>&#125;];</span><br><span class="line">​<span class="keyword">var</span> createIdForActionCelebs = celebrityIDCreator(actionCelebs);</span><br><span class="line">​<span class="keyword">var</span> stalloneID = createIdForActionCelebs[<span class="number">0</span>];</span><br><span class="line">alert(stalloneID.id); <span class="comment">// 100</span></span><br></pre></td></tr></table></figure>
-<h3 id="Reference">Reference</h3><p>[1] <a href="http://javascriptissexy.com/understand-javascript-closures-with-ease/" target="_blank" rel="external">Understand JavaScript Closures With Ease</a></p>
-<p>[2] <a href="http://www.javascriptkit.com/javatutors/closures.shtml" target="_blank" rel="external">JavaScript Closures 101- they’re not magic</a></p>
-
-            
-          </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/11/26/JavaScript-Closures/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -334,25 +414,12 @@
 
       
         
-          <span itemprop="articleBody">
-            
-              <p>Yesterday I demonstrated the ways of building simple websites and creating more complex single-page-application (SPA) in the SSG Seasonal Research &amp; Tech Workshop. During and after the event, I was asked heavily about my setup for doing web development on my Macbook, so that I decided to write a post here to share my setup for web development on my Macbook.</p>
-<h3 id="iTerm2">iTerm2</h3><p>Although the Terminal.app of Mac OS X is powerful enough for regular uses, I still prefer to use <a href="http://iterm2.com/" target="_blank" rel="external">iTerm2</a>. You can take a glance at the power of iTerm2 on its <a href="https://iterm2.com/features.html" target="_blank" rel="external">feature page</a>.</p>
-<h3 id="Zsh">Zsh</h3><p>Being crowned the title of “the ultimate shell”, <a href="http://www.zsh.org/" target="_blank" rel="external">Zsh</a> is one of the must-haves of mine for years. I mean, man, take a look at its <a href="https://en.wikipedia.org/wiki/Z_shell#Features" target="_blank" rel="external">wiki</a>.</p>
-<h3 id="Git">Git</h3><p>Seriously? You don’t know what Git is?</p>
-<p>You may find my <a href="/2015/11/25/Git-101/">Git 101</a> helpful.</p>
-<h3 id="Node-js">Node.js</h3><p>As a modern front-end engineer (or just pretend you are one), you must have heard about <a href="https://nodejs.org/en/" target="_blank" rel="external">Node.js</a> before. </p>
-<h3 id="Sublime_Text_3">Sublime Text 3</h3><p><a href="http://www.sublimetext.com/3" target="_blank" rel="external">Sublime Text 3</a> is a powerful programming text editor. Although I sticked to Vim for several years, I eventually switched to Sublime Text since it (1) is fast – at least not significantly slower than Vim for me ; (2) provides a great bunch of plugins – most of the plugins that I used in Vim are either ported or cloned (un)officially; and (3) looks great. :-)</p>
-<h4 id="Package_Control">Package Control</h4><p>Comparing with Atom, a younger programming text editor released by GitHub, Sublime Text does not provide package control out of the box. You need get the package control installed by:</p>
-<ul>
-<li>Press <code>ctrl + `</code> in Sublime Text;</li>
-<li>Then copy &amp; paste the follow code to the console and hit enter:</li>
-</ul>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import urllib.request,os,hashlib; h = <span class="string">'eb2297e1a458f27d836c04bb0cbaf282'</span> + <span class="string">'d0e7a3098092775ccb37ca9d6b2e4b7d'</span>; pf = <span class="string">'Package Control.sublime-package'</span>; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); <span class="keyword">by</span> = urllib.request.urlopen( <span class="string">'http://packagecontrol.io/'</span> + pf.<span class="built_in">replace</span>(<span class="string">' '</span>, <span class="string">'%20'</span>)).<span class="built_in">read</span>(); dh = hashlib.sha256(<span class="keyword">by</span>).hexdigest(); print(<span class="string">'Error validating download (got %s instead of %s), please try manual install'</span> % (dh, h)) <span class="keyword">if</span> dh != h <span class="keyword">else</span> <span class="built_in">open</span>(os.path.join( ipp, pf), <span class="string">'wb'</span> ).<span class="built_in">write</span>(<span class="keyword">by</span>)</span><br></pre></td></tr></table></figure>
-<p>Once package control is installed, it is available in the <code>cmd + shift + p</code> command panel.</p>
-
-            
-          </span>
+          <p>Yesterday I demonstrated the ways of building simple websites and creating more complex single-page-application (SPA) in the SSG Seasonal Research &amp; Tech Workshop. During and after the event, I was asked heavily about my setup for doing web development on my Macbook, so that I decided to write a post here to share my setup for web development on my Macbook.</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/11/25/My-Mac-OS-X-Setup-for-Web-Development/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -511,28 +578,13 @@
 
       
         
-          <span itemprop="articleBody">
-            
-              <p>If you happened to learn or use Node.JS you should definitely heard about the word “Asynchronous”. This is extremely useful as in a single-thread environment just like Javascript we always want to ensure that our programs will not be blocked by any expensive procedures at run-time. For example, like consider the below code segment:</p>
+          <p>If you happened to learn or use Node.JS you should definitely heard about the word “Asynchronous”. This is extremely useful as in a single-thread environment just like Javascript we always want to ensure that our programs will not be blocked by any expensive procedures at run-time. For example, like consider the below code segment:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> sql = <span class="string">'SELECT name FROM users'</span>;</span><br><span class="line"><span class="keyword">var</span> users = query(database, sql); <span class="comment">// suppose query returns an array</span></span><br><span class="line"><span class="built_in">console</span>.log(users.length);</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p>This is a pretty traditional synchronous database querying procedure, which retrieves all the user names from database and the print the number of users in console. However, the second line could actually be a bad ass if the database contains tons of records or we happened to suffer from a slow network connection. Thereafter, our program will very likely to be blocked at the second line until it receives the result sending back from database.</p>
-<p>In Node.JS, we use a mechanism called “callback” to address this issue and change the above program into something like this:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> sql = <span class="string">'SELECT name FROM users'</span>;</span><br><span class="line">query(database, sql, <span class="function"><span class="keyword">function</span>(<span class="params">err, res</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!err) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(res.length);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p>This solution is brilliant. The whole program will not be blocked while waiting for the result from database. Instead, the callback function at line 2 will be invoked once the result is delivered back. Before that, the code will just keep going through the remaining procedures in the program.</p>
-<p>However, when we are benefited by callback functions we sometimes will encounter the case of “callback hell”. Now let’s take a look at another code snippet below:</p>
-<figure class="highlight js"><figcaption><span>Callbacks</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> toast = <span class="function"><span class="keyword">function</span> (<span class="params">msg, callback</span>) </span>&#123;</span><br><span class="line"><span class="pi">    'use strict'</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(msg);</span><br><span class="line">    process.nextTick(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        callback(msg);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">toast(<span class="number">1</span>, <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line"><span class="pi">    'use strict'</span>;</span><br><span class="line">    toast(++data, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        toast(++data, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            toast(++data, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                toast(++data, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                    <span class="comment">// Do nothing here for now...</span></span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>It is clear that as soon as we add more callbacks into our program, the indentation levels will therefore dramatically increased and eventually turn our code into something called “pyramid code”. This will also cause some other problems that were in-depth described in this <a href="http://www.youtube.com/watch?v=hf1T_AONQJU" target="_blank" rel="external">presentation</a>.</p>
-<p>To address this, Javascript Promises is proposed. In a nutshell, it provides us another pattern to create asynchronous programs in Javascript. A <em>Promise</em> essentially is an object that going to have some value at a time point in future. By correctly utilizing Promises, we can therefore create a chain of processes being executed asynchronously. The below code snippet does the same thing as the previous code does:</p>
-<figure class="highlight js"><figcaption><span>Javascript Promises</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Q = <span class="built_in">require</span>(<span class="string">'q'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> pro = <span class="function"><span class="keyword">function</span> (<span class="params">data, error</span>) </span>&#123;</span><br><span class="line"><span class="pi">    'use strict'</span>;</span><br><span class="line">    <span class="keyword">var</span> d = Q.defer();</span><br><span class="line">    <span class="built_in">console</span>.log(data);</span><br><span class="line">    d.resolve(data);</span><br><span class="line">    d.reject(<span class="keyword">new</span> <span class="built_in">Error</span>(error));</span><br><span class="line">    <span class="keyword">return</span> d.promise;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> toast = <span class="function"><span class="keyword">function</span> (<span class="params">msg</span>) </span>&#123;</span><br><span class="line"><span class="pi">    'use strict'</span>;</span><br><span class="line">    <span class="keyword">return</span> pro(msg);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">toast(<span class="number">1</span>).then(<span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line"><span class="pi">    'use strict'</span>;</span><br><span class="line">    <span class="keyword">return</span> pro(data + <span class="number">1</span>);</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line"><span class="pi">    'use strict'</span>;</span><br><span class="line">    <span class="keyword">return</span> pro(data + <span class="number">1</span>);</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line"><span class="pi">    'use strict'</span>;</span><br><span class="line">    <span class="keyword">return</span> pro(data + <span class="number">1</span>);</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line"><span class="pi">    'use strict'</span>;</span><br><span class="line">    <span class="keyword">return</span> pro(data + <span class="number">1</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>In line 1, I required a Node.JS module called “Q”. It is one of the implementations of Javascript Promises. Meanwhile, there are also several alternatives you can use.</p>
-<p>From line 17 onwards, I called the method <code>then</code> in a cascading way to get the number printed in console progressively increased. It should be noticed that all the <em>then</em> are invoked asynchronously. Therefore, if one of them happens to be expensive at run-time, the whole program will still remain as non-blocked.</p>
-<p>To use Javascript Promises is fairly straightforward, if you want to use it in Node.JS, you can install, for example, Q by:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install q</span><br></pre></td></tr></table></figure>
-<p>If you would like to use it in front-end Javascript, then just simply import Q by putting the below code in your HTML head or body.</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"//cdnjs.cloudflare.com/ajax/libs/q.js/1.0.0/q.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-            
-          </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/01/27/javascript-promises-101/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -608,18 +660,14 @@
 
       
         
-          <span itemprop="articleBody">
-            
-              <blockquote><p>Universal Description, Discovery and Integration is a platform-independent, Extensible Markup Language (XML)-based registry by which businesses worldwide can list themselves on the Internet, and a mechanism to register and locate web service applications.</p>
+          <blockquote><p>Universal Description, Discovery and Integration is a platform-independent, Extensible Markup Language (XML)-based registry by which businesses worldwide can list themselves on the Internet, and a mechanism to register and locate web service applications.</p>
 <footer><strong>Wikipedia</strong><cite>Universal Description Discovery and Integration</cite></footer></blockquote>
 <h2 id="The_Fallen_of_Public_UDDI">The Fallen of Public UDDI</h2><p>As described by its definition, <strong>UDDI</strong> (<strong>U</strong>niversal <strong>D</strong>escription <strong>D</strong>iscovery and <strong>I</strong>ntegration) aims at provide a more or less centralised repository for service registration and discovery, so that service composition could be then further supported by reducing the difficulty of searching decent services to compose. The whole idea looks fine, until the major players in the UDDI movement eventually fall apart.</p>
-<p>The problem of a public UDDI is in its so-called “universal” feature. Just like what happened to the Web, different parties produce information on different websites. It is almost impossible to ask people putting their stuffs under the same domain or website. Why? <strong>It is expensive!</strong> To make multiple parties coordinating and even integrating with others, the information and data provided have to be formularised. It may be okay for big companies who always steering the games. But what about small organisations and even individual providers? It could be meaningless to heavily envolope a “Hello World”. So far so forth, the universal repository of Web services also failed.</p>
-<h2 id="Service_Spotlight_to_the_Rescue">Service Spotlight to the Rescue</h2><p>To assist service composition, we still need something to help us discovering services. For me, <em>search engine</em> could be the solution. However, if you type “map location” in Google, you will get tons of results which are actually not the Web services that we can compose. Therefore, I recently developed <a href="http://feifeihang.info/spotlight" target="_blank" rel="external">Service Spotlight</a> as a dedicated Web service search engine. Its back-end crawlers grab service descriptions from several service providers, such as Twitter and Flickr, and popular service repositories like Programmable Web.</p>
-<p>In the next development stage, all the service descriptions found by Service Spotlight will by automatically convert to the form of either natural language or structure format such as WSDL and WADL.</p>
-<p>I believe that this will be a more effective and realistic solution to address service discovery comparing to UDDI.</p>
-
-            
-          </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/01/25/service-spotlight-an-alternative-to-uddi/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -722,18 +770,14 @@
 
       
         
-          <span itemprop="articleBody">
-            
-              <p>Back in the early 1990s, graphical user interface Web browsers such as Mosaic and Netspace Navigators popularized the World Wide Web among end-users. Since then, we witnessed the booming of IT and its related fields and technologies, which eventually shifted the way that we live. In so many areas, it is really hard to imagine how we can live or work without Internet and the Web nowadays.</p>
+          <p>Back in the early 1990s, graphical user interface Web browsers such as Mosaic and Netspace Navigators popularized the World Wide Web among end-users. Since then, we witnessed the booming of IT and its related fields and technologies, which eventually shifted the way that we live. In so many areas, it is really hard to imagine how we can live or work without Internet and the Web nowadays.</p>
 <p>Besides the efforts and attentions from academics and industries and governments, we should never forget that end-users were also playing a crucial role in the development of Web. By understanding the importance of end-users, we embraced Web 2.0 which aims to more directly get end-users involved in the growth and improvement of Web.</p>
 <p>When we look at the Web itself at a relatively high level, it is essentially a media that coordinates, allocates, and manipulates computing and even human resources across Internet. For example, when searching on Google, what happening behind the scene is instead of searching on your own computers, Google’s database is being searched to provide you candidate results, and all the coordinations are done on the Web. Thus, from the prospective of computer science or information technology, Web itself is actually more like an operating system.</p>
-<p>When we use desktop operating systems (including both kernels and GUIs), either Windows or Mac OS X or Linux, we install software and software bundles like Microsoft Office to assist our daily works. Normally, if there is any software that cannot fulfill our requirements we can then just switch to alternative ones. For example, if you are not happy to use Microsoft Word for document processing, you may want to use Apple iWork instead. However, this kind of flexibility is missing in the field that we call “Web Services”.</p>
-<p>To date, almost everyone of us who surf Internet are being benefited by Web services. For instance, you may use Starbucks app on your mobile phone to find where the nearest place to drink coffee. The app, or let’s call it “service”, consists of Starbucks’s own service that tells the address of each Starbucks store and, for example, Google Maps that can eventually show the locations to users graphically. In this way, this service is actually a service bundle which we call “Composite Service”. However, comparing with what we can do on traditional desktop operating systems, we can hardly make any changes to those primitive services involved in composite services to better serve our requirements.</p>
-<p>Once upon a time, those big companies such as Google, Microsoft, and Yahoo! has release their tools to assist end-users to create their own composite services. However, all of a sudden, most of these tools and projects are cancelled. Both academics and industries start to neglect the importance of end-users in the realm of Web services. They start even to forget the fact that without end-users, Internet and WWW would never achieve what they did nowadays.</p>
-<p>Therefore, I, once again, propose that more attentions <strong>have to</strong> be paid to get more end-users involved in the development of Web services. Since we have already witnessed the success of Web 2.0, I would call the shift that I proposed “Web Service 2.0”.</p>
-
-            
-          </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/01/25/web-service-2-dot-0/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -998,87 +1042,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2012/06/07/web-the-boundary-object-of-people/" itemprop="url">
-                  Web: The Boundary Object for People
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            Posted on
-            <time itemprop="dateCreated" datetime="2012-06-07T15:14:00+08:00" content="2012-06-07">
-              2012-06-07
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>In social science, <strong>boundary objects</strong> are being defined as “<em>the objects that cross the boundaries between multiple social worlds</em>“. A concrete example in real life is “library”. In a library, the readers are from different social worlds, e.g. some of them are doing computer science while others are dedicating to business. As a repository of knowledge, the library brings us the opportunity to get along with others from different social worlds. Therefore the library is essentially acting as a boundary object between these social worlds.</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2012/06/07/web-the-boundary-object-of-people/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1118,14 +1081,14 @@
 
       <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Feifei Hang" itemprop="image"/>
+          <img class="site-author-image" src="/files/avatar.png" alt="Feifei Hang" itemprop="image"/>
           <p class="site-author-name" itemprop="name">Feifei Hang</p>
         </div>
         <p class="site-description motion-element" itemprop="description">A PhD candidate, passionates about Front-End Development.</p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-count">25</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -1149,6 +1112,24 @@
         
 
         <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://feifeihang.info" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Homepage
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hufyhang" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
           
         </div>
 
@@ -1174,7 +1155,7 @@
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy; 
+  &copy;  2012 - 
   <span itemprop="copyrightYear">2015</span>
   <span class="with-love">
     <i class="icon-next-heart fa fa-heart"></i>

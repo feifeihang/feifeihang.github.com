@@ -57,7 +57,7 @@
 <meta property="og:url" content="http://feifeihang.github.io/2015/11/26/JavaScript-Closures/index.html">
 <meta property="og:site_name" content="FEIFEI HANG'S BLOG">
 <meta property="og:description" content="If you happen to program in JavaScript, you must have (sooner or later) came through one of the most allegedly confusing and hard understanding concept - closure. After reading several related posts,">
-<meta property="og:updated_time" content="2015-11-26T05:01:15.000Z">
+<meta property="og:updated_time" content="2015-11-26T10:33:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript Closures">
 <meta name="twitter:description" content="If you happen to program in JavaScript, you must have (sooner or later) came through one of the most allegedly confusing and hard understanding concept - closure. After reading several related posts,">
@@ -231,6 +231,7 @@
 <li>A closure is <strong>an inner function</strong> that has <strong>access</strong> to the <strong>outer (enclosing) function’s variables</strong> – scope chain [1].</li>
 <li>A closure is the local variables of a function – <strong>kept alive after the function has returned</strong> [2].</li>
 </ul>
+<a id="more"></a>
 <h3 id="Why_closure?">Why closure?</h3><p>Closure can be used in several scenarios. Below are its two major uses:</p>
 <h4 id="Accessing_outer/enclosing_function’s_variables">Accessing outer/enclosing function’s variables</h4><p>For example:</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> num = <span class="number">100</span>;</span><br><span class="line">    <span class="keyword">var</span> inner = <span class="function"><span class="keyword">function</span> (<span class="params">n</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// Accessing `num` defined in enclosing function below.</span></span><br><span class="line">        num += n;</span><br><span class="line">        alert(num);</span><br><span class="line">    &#125;</span><br><span class="line">    alert(num);</span><br><span class="line">    <span class="keyword">return</span> inner;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> result = fn(); <span class="comment">// 100</span></span><br><span class="line">result(<span class="number">10</span>); <span class="comment">// 110</span></span><br><span class="line">result(<span class="number">10</span>); <span class="comment">// 120</span></span><br></pre></td></tr></table></figure>
@@ -267,6 +268,10 @@
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/11/26/JavaScript-setTimeout/" rel="prev" title="JavaScript setTimeout">
+                JavaScript setTimeout <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -327,14 +332,14 @@
 
       <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Feifei Hang" itemprop="image"/>
+          <img class="site-author-image" src="/files/avatar.png" alt="Feifei Hang" itemprop="image"/>
           <p class="site-author-name" itemprop="name">Feifei Hang</p>
         </div>
         <p class="site-description motion-element" itemprop="description">A PhD candidate, passionates about Front-End Development.</p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-count">25</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -358,6 +363,24 @@
         
 
         <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://feifeihang.info" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Homepage
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hufyhang" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
           
         </div>
 
@@ -400,7 +423,7 @@
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy; 
+  &copy;  2012 - 
   <span itemprop="copyrightYear">2015</span>
   <span class="with-love">
     <i class="icon-next-heart fa fa-heart"></i>
