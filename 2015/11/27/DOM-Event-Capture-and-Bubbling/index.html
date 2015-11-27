@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="report," />
+  <meta name="keywords" content="DOM,web development," />
 
 
 
@@ -51,16 +51,16 @@
 
 
 
-<meta name="description" content="Thanks Takashi Ishio and et al. and their [1], a promising approach for mining coding patterns has been proposed. To be fair, the idea and method they described in their paper are quite interesting to">
+<meta name="description" content="Early this morning, my folk Chris from IMG sent me an email regarding an issue that he encountered on his web development project. I found that it is a traditional “DOM event bubbling and capture” pro">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Miner Takashi">
-<meta property="og:url" content="http://feifeihang.github.io/2012/02/12/miner-takashi/index.html">
+<meta property="og:title" content="DOM Event Capture and Bubbling">
+<meta property="og:url" content="http://feifeihang.github.io/2015/11/27/DOM-Event-Capture-and-Bubbling/index.html">
 <meta property="og:site_name" content="FEIFEI HANG'S BLOG">
-<meta property="og:description" content="Thanks Takashi Ishio and et al. and their [1], a promising approach for mining coding patterns has been proposed. To be fair, the idea and method they described in their paper are quite interesting to">
-<meta property="og:updated_time" content="2015-11-25T11:36:52.000Z">
+<meta property="og:description" content="Early this morning, my folk Chris from IMG sent me an email regarding an issue that he encountered on his web development project. I found that it is a traditional “DOM event bubbling and capture” pro">
+<meta property="og:updated_time" content="2015-11-27T05:38:25.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Miner Takashi">
-<meta name="twitter:description" content="Thanks Takashi Ishio and et al. and their [1], a promising approach for mining coding patterns has been proposed. To be fair, the idea and method they described in their paper are quite interesting to">
+<meta name="twitter:title" content="DOM Event Capture and Bubbling">
+<meta name="twitter:description" content="Early this morning, my folk Chris from IMG sent me an email regarding an issue that he encountered on his web development project. I found that it is a traditional “DOM event bubbling and capture” pro">
 
 
 
@@ -72,7 +72,7 @@
   };
 </script>
 
-  <title> Miner Takashi | FEIFEI HANG'S BLOG </title>
+  <title> DOM Event Capture and Bubbling | FEIFEI HANG'S BLOG </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -192,7 +192,7 @@
             
             
               
-                Miner Takashi
+                DOM Event Capture and Bubbling
               
             
           </h1>
@@ -201,8 +201,8 @@
         <div class="post-meta">
           <span class="post-time">
             Posted on
-            <time itemprop="dateCreated" datetime="2012-02-12T14:52:00+08:00" content="2012-02-12">
-              2012-02-12
+            <time itemprop="dateCreated" datetime="2015-11-27T11:21:36+08:00" content="2015-11-27">
+              2015-11-27
             </time>
           </span>
 
@@ -225,11 +225,25 @@
       
 
       
-        <span itemprop="articleBody"><p>Thanks Takashi Ishio and et al. and their [1], a promising approach for mining coding patterns has been proposed. To be fair, the idea and method they described in their paper are quite interesting to me, because by following their way for mining patterns and information, even the variants can be traced. However, besides the brilliant method they introduced, my concern is that if their approach is really TM-based.</p>
-<p>Cheers!!!</p>
-<p>Feifei</p>
-<p>——</p>
-<p>[1] Takashi Ishio and et al., 2008, Mining Coding Patterns to Detect Crosscutting Concerns in Java Programs</p>
+        <span itemprop="articleBody"><p>Early this morning, my folk Chris from IMG sent me an email regarding an issue that he encountered on his web development project. I found that it is a traditional “DOM event bubbling and capture” problem, and thought it may be worth to be posted here for others who also come through the same situation.</p>
+<a id="more"></a>
+<p>In short, what Chris wants to achieve is that a div element is enclosed in another div element, while each div element is registered a click event. Ideally, when the inner div is clicked, it should show “Inner”, whereas “Outer” should be shown when the outer div is clicked.</p>
+<p>A simplified version of Chris’s code is shown below:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"parent"</span>&gt;</span></span><br><span class="line">    Parent</span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"child"</span>&gt;</span>Child<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript"></span><br><span class="line">    <span class="keyword">var</span> parent = <span class="built_in">document</span>.getElementById(<span class="string">'parent'</span>);</span><br><span class="line">    <span class="keyword">var</span> child = <span class="built_in">document</span>.getElementById(<span class="string">'child'</span>);</span><br><span class="line"></span><br><span class="line">    parent.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        alert(<span class="string">'Parent'</span>);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    child.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        alert(<span class="string">'Child'</span>);</span><br><span class="line">    &#125;)</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>For some novices, the above code may looks okay. However, once you test it out you will soon realize that once the <code>child</code> gets clicked, <code>alert(&#39;Parent&#39;)</code> will also get executed. That is exactly the problem confused Chris.</p>
+<p>The reason of the problem is that DOM has two ways for objects to detect events: from the top down, and from the bottom up. The first method is known as event capture, the second is called event bubbling. </p>
+<h3 id="Event_Capture">Event Capture</h3><p>With capturing, the event is first captured by the <em>outermost</em> element and then propagated to the inner elements.</p>
+<p>The below diagram taken from QuirksMode.org [1] illustrates event capturing.</p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">               |<span class="string"> </span>|</span><br><span class="line">---------------|<span class="string"> </span>|<span class="string">-----------------</span><br><span class="line"></span>|<span class="string"> element1     </span>|<span class="string"> </span>|<span class="string">                </span>|</span><br><span class="line">|<span class="string">   -----------</span>|<span class="string"> </span>|<span class="string">-----------     </span>|</span><br><span class="line">|<span class="string">   </span>|<span class="string">element2  \ /          </span>|<span class="string">     </span>|</span><br><span class="line">|<span class="string">   -------------------------     </span>|</span><br><span class="line">|<span class="string">        Event CAPTURING          </span>|</span><br><span class="line">-----------------------------------</span><br></pre></td></tr></table></figure>
+<h3 id="Event_Bubbling">Event Bubbling</h3><p>With bubbling, the event is first captured by the <em>innermost</em> element and propagated to the outer elements.</p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">               / \</span><br><span class="line">---------------|<span class="string"> </span>|<span class="string">-----------------</span><br><span class="line"></span>|<span class="string"> element1     </span>|<span class="string"> </span>|<span class="string">                </span>|</span><br><span class="line">|<span class="string">   -----------</span>|<span class="string"> </span>|<span class="string">-----------     </span>|</span><br><span class="line">|<span class="string">   </span>|<span class="string">element2  </span>|<span class="string"> </span>|<span class="string">          </span>|<span class="string">     </span>|</span><br><span class="line">|<span class="string">   -------------------------     </span>|</span><br><span class="line">|<span class="string">        Event BUBBLING           </span>|</span><br><span class="line">-----------------------------------</span><br></pre></td></tr></table></figure>
+<h3 id="Stop_Event_Propagation">Stop Event Propagation</h3><p>By registering events with <code>addEventListener</code>, bubbling is being used as the default event propagation method. Actually, there is a third optional boolean parameter to <code>addEventListener</code>. This parameter indicates if the user wishes to use event capturing instead of bubbling. For example:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">aDOMNode.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">/* do something... */</span></span><br><span class="line">&#125;, <span class="literal">true</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Also, the propagation of events can be stopped by using <code>stopPropagation</code>. Below is my solution to address Chris’s problem. Notice that an <code>evt</code> parameter is passed to the callback function of child’s click event.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"parent"</span>&gt;</span></span><br><span class="line">    Parent</span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"child"</span>&gt;</span>Child<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript"></span><br><span class="line">    <span class="keyword">var</span> parent = <span class="built_in">document</span>.getElementById(<span class="string">'parent'</span>);</span><br><span class="line">    <span class="keyword">var</span> child = <span class="built_in">document</span>.getElementById(<span class="string">'child'</span>);</span><br><span class="line"></span><br><span class="line">    parent.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        alert(<span class="string">'Parent'</span>);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    child.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">evt</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (evt.stopPropagation) &#123;</span><br><span class="line">            evt.stopPropagation();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            evt.cancelBubble = <span class="literal">false</span>; <span class="comment">// For old IEs.</span></span><br><span class="line">        &#125;</span><br><span class="line">        alert(<span class="string">'Child'</span>);</span><br><span class="line">    &#125;)</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Reference">Reference</h3><ol>
+<li><a href="http://www.quirksmode.org/js/events_order.html" target="_blank" rel="external">QuirksMode.org</a></li>
+</ol>
 </span>
       
     </div>
@@ -238,7 +252,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/report/" rel="tag">#report</a>
+            <a href="/tags/DOM/" rel="tag">#DOM</a>
+          
+            <a href="/tags/web-development/" rel="tag">#web development</a>
           
         </div>
       
@@ -247,17 +263,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2012/02/10/graphical-brainstorm/" rel="next" title=""Graphical" Brainstorm">
-                <i class="fa fa-chevron-left"></i> "Graphical" Brainstorm
+              <a href="/2015/11/26/JavaScript-setTimeout/" rel="next" title="JavaScript setTimeout">
+                <i class="fa fa-chevron-left"></i> JavaScript setTimeout
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2012/02/13/aspect-era/" rel="prev" title="Aspect Era">
-                Aspect Era <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -389,7 +401,7 @@
               
             
             
-              <p class="post-toc-empty">This post does not have a Table Of Contents</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Event_Capture"><span class="nav-number">1.</span> <span class="nav-text">Event Capture</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Event_Bubbling"><span class="nav-number">2.</span> <span class="nav-text">Event Bubbling</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stop_Event_Propagation"><span class="nav-number">3.</span> <span class="nav-text">Stop Event Propagation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
