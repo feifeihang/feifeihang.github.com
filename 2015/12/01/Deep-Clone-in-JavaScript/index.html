@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="javascript,web,web development," />
+  <meta name="keywords" content="javascript," />
 
 
 
@@ -51,16 +51,19 @@
 
 
 
-<meta name="description" content="Yesterday I demonstrated the ways of building simple websites and creating more complex single-page-application (SPA) in the SSG Seasonal Research &amp;amp; Tech Workshop. During and after the event, I wa">
+<meta name="description" content="For those who want to do deep copy/clone in JavaScript, below is a solution:
+1234567891011121314function clone(obj) &amp;#123;    if (obj == null || typeof obj !== &apos;object&apos;) &amp;#123;        return obj;    &amp;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="My Mac OS X Setup for Web Development">
-<meta property="og:url" content="http://feifeihang.github.io/2015/11/25/My-Mac-OS-X-Setup-for-Web-Development/index.html">
+<meta property="og:title" content="Deep Copy/Clone in JavaScript">
+<meta property="og:url" content="http://feifeihang.github.io/2015/12/01/Deep-Clone-in-JavaScript/index.html">
 <meta property="og:site_name" content="FEIFEI HANG'S BLOG">
-<meta property="og:description" content="Yesterday I demonstrated the ways of building simple websites and creating more complex single-page-application (SPA) in the SSG Seasonal Research &amp;amp; Tech Workshop. During and after the event, I wa">
-<meta property="og:updated_time" content="2015-11-26T10:34:03.000Z">
+<meta property="og:description" content="For those who want to do deep copy/clone in JavaScript, below is a solution:
+1234567891011121314function clone(obj) &amp;#123;    if (obj == null || typeof obj !== &apos;object&apos;) &amp;#123;        return obj;    &amp;">
+<meta property="og:updated_time" content="2015-12-01T07:48:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="My Mac OS X Setup for Web Development">
-<meta name="twitter:description" content="Yesterday I demonstrated the ways of building simple websites and creating more complex single-page-application (SPA) in the SSG Seasonal Research &amp;amp; Tech Workshop. During and after the event, I wa">
+<meta name="twitter:title" content="Deep Copy/Clone in JavaScript">
+<meta name="twitter:description" content="For those who want to do deep copy/clone in JavaScript, below is a solution:
+1234567891011121314function clone(obj) &amp;#123;    if (obj == null || typeof obj !== &apos;object&apos;) &amp;#123;        return obj;    &amp;">
 
 
 
@@ -72,7 +75,7 @@
   };
 </script>
 
-  <title> My Mac OS X Setup for Web Development | FEIFEI HANG'S BLOG </title>
+  <title> Deep Copy/Clone in JavaScript | FEIFEI HANG'S BLOG </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -192,7 +195,7 @@
             
             
               
-                My Mac OS X Setup for Web Development
+                Deep Copy/Clone in JavaScript
               
             
           </h1>
@@ -201,8 +204,8 @@
         <div class="post-meta">
           <span class="post-time">
             Posted on
-            <time itemprop="dateCreated" datetime="2015-11-25T21:00:13+08:00" content="2015-11-25">
-              2015-11-25
+            <time itemprop="dateCreated" datetime="2015-12-01T14:13:06+08:00" content="2015-12-01">
+              2015-12-01
             </time>
           </span>
 
@@ -225,21 +228,8 @@
       
 
       
-        <span itemprop="articleBody"><p>Yesterday I demonstrated the ways of building simple websites and creating more complex single-page-application (SPA) in the SSG Seasonal Research &amp; Tech Workshop. During and after the event, I was asked heavily about my setup for doing web development on my Macbook, so that I decided to write a post here to share my setup for web development on my Macbook.</p>
-<a id="more"></a>
-<h3 id="iTerm2">iTerm2</h3><p>Although the Terminal.app of Mac OS X is powerful enough for regular uses, I still prefer to use <a href="http://iterm2.com/" target="_blank" rel="external">iTerm2</a>. You can take a glance at the power of iTerm2 on its <a href="https://iterm2.com/features.html" target="_blank" rel="external">feature page</a>.</p>
-<h3 id="Zsh">Zsh</h3><p>Being crowned the title of “the ultimate shell”, <a href="http://www.zsh.org/" target="_blank" rel="external">Zsh</a> is one of the must-haves of mine for years. I mean, man, take a look at its <a href="https://en.wikipedia.org/wiki/Z_shell#Features" target="_blank" rel="external">wiki</a>.</p>
-<h3 id="Git">Git</h3><p>Seriously? You don’t know what Git is?</p>
-<p>You may find my <a href="/2015/11/25/Git-101/">Git 101</a> helpful.</p>
-<h3 id="Node-js">Node.js</h3><p>As a modern front-end engineer (or just pretend you are one), you must have heard about <a href="https://nodejs.org/en/" target="_blank" rel="external">Node.js</a> before. </p>
-<h3 id="Sublime_Text_3">Sublime Text 3</h3><p><a href="http://www.sublimetext.com/3" target="_blank" rel="external">Sublime Text 3</a> is a powerful programming text editor. Although I sticked to Vim for several years, I eventually switched to Sublime Text since it (1) is fast – at least not significantly slower than Vim for me ; (2) provides a great bunch of plugins – most of the plugins that I used in Vim are either ported or cloned (un)officially; and (3) looks great. :-)</p>
-<h4 id="Package_Control">Package Control</h4><p>Comparing with Atom, a younger programming text editor released by GitHub, Sublime Text does not provide package control out of the box. You need get the package control installed by:</p>
-<ul>
-<li>Press <code>ctrl + `</code> in Sublime Text;</li>
-<li>Then copy &amp; paste the follow code to the console and hit enter:</li>
-</ul>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import urllib.request,os,hashlib; h = <span class="string">'eb2297e1a458f27d836c04bb0cbaf282'</span> + <span class="string">'d0e7a3098092775ccb37ca9d6b2e4b7d'</span>; pf = <span class="string">'Package Control.sublime-package'</span>; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); <span class="keyword">by</span> = urllib.request.urlopen( <span class="string">'http://packagecontrol.io/'</span> + pf.<span class="built_in">replace</span>(<span class="string">' '</span>, <span class="string">'%20'</span>)).<span class="built_in">read</span>(); dh = hashlib.sha256(<span class="keyword">by</span>).hexdigest(); print(<span class="string">'Error validating download (got %s instead of %s), please try manual install'</span> % (dh, h)) <span class="keyword">if</span> dh != h <span class="keyword">else</span> <span class="built_in">open</span>(os.path.join( ipp, pf), <span class="string">'wb'</span> ).<span class="built_in">write</span>(<span class="keyword">by</span>)</span><br></pre></td></tr></table></figure>
-<p>Once package control is installed, it is available in the <code>cmd + shift + p</code> command panel.</p>
+        <span itemprop="articleBody"><p>For those who want to do deep copy/clone in JavaScript, below is a solution:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">clone</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (obj == <span class="literal">null</span> || <span class="keyword">typeof</span> obj !== <span class="string">'object'</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> obj;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> temp = obj.constructor();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> key <span class="keyword">in</span> obj) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">Object</span>.prototype.hasOwnProperty.call(obj, key)) &#123;</span><br><span class="line">            temp[key] = clone(obj[key]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </span>
       
     </div>
@@ -250,10 +240,6 @@
           
             <a href="/tags/javascript/" rel="tag">#javascript</a>
           
-            <a href="/tags/web/" rel="tag">#web</a>
-          
-            <a href="/tags/web-development/" rel="tag">#web development</a>
-          
         </div>
       
 
@@ -261,17 +247,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/11/25/Git-101/" rel="next" title="Git 101">
-                <i class="fa fa-chevron-left"></i> Git 101
+              <a href="/2015/11/30/CSS-Specificity/" rel="next" title="CSS Specificity">
+                <i class="fa fa-chevron-left"></i> CSS Specificity
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/11/26/JavaScript-Closures/" rel="prev" title="JavaScript Closures">
-                JavaScript Closures <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -403,7 +385,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#iTerm2"><span class="nav-number">1.</span> <span class="nav-text">iTerm2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Zsh"><span class="nav-number">2.</span> <span class="nav-text">Zsh</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git"><span class="nav-number">3.</span> <span class="nav-text">Git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Node-js"><span class="nav-number">4.</span> <span class="nav-text">Node.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sublime_Text_3"><span class="nav-number">5.</span> <span class="nav-text">Sublime Text 3</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Package_Control"><span class="nav-number">5.1.</span> <span class="nav-text">Package Control</span></a></li></ol></li></ol></div>
+              <p class="post-toc-empty">This post does not have a Table Of Contents</p>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
