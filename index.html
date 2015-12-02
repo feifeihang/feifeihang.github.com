@@ -209,6 +209,92 @@
             
               
                 
+                <a class="post-title-link" href="/2015/12/02/A-JavaScript-Promise-Implementation/" itemprop="url">
+                  A JavaScript Promise Implementation
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            Posted on
+            <time itemprop="dateCreated" datetime="2015-12-02T13:22:05+08:00" content="2015-12-02">
+              2015-12-02
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p>As you may know that I built a <a href="https://github.com/hufyhang/chop/tree/master/modules/promise" target="_blank" rel="external">promise module</a> for my ChopJS library a while ago. Now, below is an improved implementation I did today to support <code>when</code> method:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params">promise</span>) </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">Deferred</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.promise = <span class="keyword">this</span>;</span><br><span class="line">    <span class="keyword">this</span>.resolveCallbacks = [</span><br><span class="line">    ];</span><br><span class="line">    <span class="keyword">this</span>.rejectCallbacks = [</span><br><span class="line">    ];</span><br><span class="line">    <span class="keyword">this</span>.hookedWhen = [];</span><br><span class="line">  &#125;</span><br><span class="line">  Deferred.prototype = &#123;</span><br><span class="line">    resolve: <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> orignalData = data;</span><br><span class="line">      <span class="keyword">this</span>.resolveCallbacks.map(<span class="function"><span class="keyword">function</span> (<span class="params">cb</span>) </span>&#123;</span><br><span class="line">        data = cb(data);</span><br><span class="line">      &#125;);</span><br><span class="line">      <span class="keyword">this</span>.notifySuccess(orignalData);</span><br><span class="line">    &#125;,</span><br><span class="line">    reject: <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> originalData = data;</span><br><span class="line">      <span class="keyword">this</span>.rejectCallbacks.map(<span class="function"><span class="keyword">function</span> (<span class="params">cb</span>) </span>&#123;</span><br><span class="line">        data = cb(data);</span><br><span class="line">      &#125;);</span><br><span class="line">      <span class="keyword">this</span>.notifyFailure(originalData);</span><br><span class="line">    &#125;,</span><br><span class="line">    then: <span class="function"><span class="keyword">function</span> (<span class="params">success, failure</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">arguments</span>.length &lt; <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'expect at least 1 callback function.'</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">typeof</span> success === <span class="string">'function'</span>) <span class="keyword">this</span>.resolveCallbacks.push(success);</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">typeof</span> failure === <span class="string">'function'</span>) <span class="keyword">this</span>.rejectCallbacks.push(failure);</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">    addWhen: <span class="function"><span class="keyword">function</span> (<span class="params">when</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (when <span class="keyword">instanceof</span> When) &#123;</span><br><span class="line">        <span class="keyword">this</span>.hookedWhen.push(when.getPromise());</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    notifySuccess: <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.hookedWhen.map(<span class="function"><span class="keyword">function</span> (<span class="params">when</span>) </span>&#123;</span><br><span class="line">        when.resolve(data);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">    notifyFailure: <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.hookedWhen.map(<span class="function"><span class="keyword">function</span> (<span class="params">when</span>) </span>&#123;</span><br><span class="line">        when.reject(data);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">  promise.deferred = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Deferred();</span><br><span class="line">  &#125;;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">When</span>(<span class="params">defers</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.d = <span class="keyword">new</span> Deferred();</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  When.prototype = &#123;</span><br><span class="line">    getPromise: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.d.promise;</span><br><span class="line">    &#125;,</span><br><span class="line">    addDefer: <span class="function"><span class="keyword">function</span> (<span class="params">defer</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">typeof</span> defer === <span class="string">'function'</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> promise = defer();</span><br><span class="line">        promise.addWhen(<span class="keyword">this</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">  </span><br><span class="line">  promise.when = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">arguments</span> = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>);</span><br><span class="line">    <span class="keyword">var</span> w = <span class="keyword">new</span> When();</span><br><span class="line">    <span class="built_in">arguments</span>.map(<span class="function"><span class="keyword">function</span> (<span class="params">defer</span>) </span>&#123;</span><br><span class="line">      w.addDefer(defer);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> w.getPromise();</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">&#125;) (<span class="keyword">typeof</span> <span class="built_in">Promise</span> === <span class="string">'undefined'</span> ? <span class="built_in">window</span>.Promise = &#123;&#125; : <span class="built_in">Promise</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="Examples">Examples</h3><p>First off, let’s only use <code>then</code>.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">longLifeFn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> d = <span class="built_in">Promise</span>.deferred();</span><br><span class="line">  setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    d.resolve(<span class="string">'Hello, promise!'</span>);</span><br><span class="line">  &#125;, <span class="number">5000</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Waiting...'</span>);</span><br><span class="line">  <span class="keyword">return</span> d.promise;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">longLifeFn()</span><br><span class="line">.then(<span class="function"><span class="keyword">function</span> (<span class="params">msg</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Received: '</span> + msg);</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">&#125;)</span><br><span class="line">.then(<span class="function"><span class="keyword">function</span> (<span class="params">date</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(date);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>Now, in this improve implementation, you can also use <code>when</code>.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">anotherFn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> d = <span class="built_in">Promise</span>.deferred();</span><br><span class="line">  setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'superb promise'</span>);</span><br><span class="line">    d.resolve(<span class="string">'Bingo!'</span>);</span><br><span class="line">  &#125;, <span class="number">3000</span>);</span><br><span class="line">  <span class="keyword">return</span> d.promise;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Promise</span>.when(longLifeFn, anotherFn)</span><br><span class="line">.then(<span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'When:'</span>, data);</span><br><span class="line">  <span class="keyword">return</span> <span class="string">'Finished'</span>;</span><br><span class="line">&#125;)</span><br><span class="line">.then(<span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Message:'</span>, data);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/12/01/Quick-Sort-in-JavaScript/" itemprop="url">
                   Quicksort in JavaScript
                 </a>
@@ -505,6 +591,88 @@
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+-----------------+----------+&#10;|                 |  Check   |&#10;+-----------------+----------+</span><br></pre></td></tr></table></figure>
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/11/29/Quick-Note-Conditional-Style-in-IE10/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/11/29/ReactJS-101/" itemprop="url">
+                  React 101
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            Posted on
+            <time itemprop="dateCreated" datetime="2015-11-29T11:53:07+08:00" content="2015-11-29">
+              2015-11-29
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>Recently, I am working on a freelancing project to build a SPA. Since I have learnt React for a bit while, I decided to put it in use this time. For me, the two most significant benefits that React brings to us is (1) its performance – due to React’s virtual DOM and DOM diff mechanisms; and, (2) its way to wrap and abstract the (major) building blocks of a web app into components.</p>
+<p>For those who have yet to hear/learn React, here is a very quick and brief instruction/tutorial to guide you onto the track.</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/11/29/ReactJS-101/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -857,89 +1025,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/11/25/Git-101/" itemprop="url">
-                  Git 101
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            Posted on
-            <time itemprop="dateCreated" datetime="2015-11-25T19:40:01+08:00" content="2015-11-25">
-              2015-11-25
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h3 id="Git_101_Slides">Git 101 Slides</h3><p>For those who look for the slides of my “Git 101” crash course, here is the <a href="/files/git101.zip">download link</a>. If you prefer to view it directly online in browser, follow this <a href="http://goo.gl/CJCQHO" target="_blank" rel="external">link</a>.</p>
-<h3 id="Git_Hosting_Service">Git Hosting Service</h3><p>During the Git 101 course, I have been asked a lot about hosting service for Git except GitHub in the wild. For private hosting, I personally use Bitbucket. Should you seek for a more comprehensive list and comparison, you may find this <a href="http://www.git-tower.com/blog/git-hosting-services-compared/" target="_blank" rel="external">list</a> provided by Tower helpful.</p>
-<p><strong>N.B.:</strong> <del>Unfortunately</del> Luckily, by the school’s policy, you are only allowed to host your school projects on school’s <del>buggy</del> GitLab.</p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -986,7 +1071,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">31</span>
+              <span class="site-state-item-count">32</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
