@@ -209,6 +209,97 @@
             
               
                 
+                <a class="post-title-link" href="/2015/12/01/Quick-Sort-in-JavaScript/" itemprop="url">
+                  Quicksort in JavaScript
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            Posted on
+            <time itemprop="dateCreated" datetime="2015-12-01T17:07:48+08:00" content="2015-12-01">
+              2015-12-01
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <blockquote>
+<p>Quicksort (sometimes called partition-exchange sort) is an efficient sorting algorithm, serving as a systematic method for placing the elements of an array in order. Developed by Tony Hoare in 1959, with his work published in 1961, it is still a commonly used algorithm for sorting. When implemented well, it can be about two or three times faster than its main competitors, merge sort and heapsort.</p>
+<p>– <cite>Wikepedia</cite></p>
+</blockquote>
+<p>Quicksort is a super useful and efficient sorting algorithm. It follows the following the procedures:</p>
+<ol>
+<li>Get a pivot (usually the middle point) from the dataset to be sorted.</li>
+<li>For all the items smaller than pivot, move them to pivot’s left; For the bigger ones, move to right.</li>
+<li>For the left and right sets, repeat the above two steps until there is only one item in each set.</li>
+</ol>
+<p>Below is my implementation of Quicksort in JavaScript.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">quicksort</span>(<span class="params">dataset</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (dataset.length &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> dataset;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> pivotIndex = <span class="built_in">Math</span>.floor(dataset.length / <span class="number">2</span>);</span><br><span class="line">    <span class="keyword">var</span> pivot = dataset.splice(pivotIndex, <span class="number">1</span>)[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">var</span> left = [];</span><br><span class="line">    <span class="keyword">var</span> right = [];</span><br><span class="line"></span><br><span class="line">    dataset.map(<span class="function"><span class="keyword">function</span> (<span class="params">item</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (item &lt; pivot) &#123;</span><br><span class="line">            left.push(item);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            right.push(item);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> quicksort(left).concat(pivot, quicksort(right));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/12/01/Deep-Clone-in-JavaScript/" itemprop="url">
                   Deep Copy/Clone in JavaScript
                 </a>
@@ -291,8 +382,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/11/29/Quick-Note-Conditional-Style-in-IE10/" itemprop="url">
-                  Quick Note: Conditional Style in IE10+
+                <a class="post-title-link" href="/2015/11/30/CSS-Specificity/" itemprop="url">
+                  CSS Specificity
                 </a>
               
             
@@ -302,8 +393,8 @@
         <div class="post-meta">
           <span class="post-time">
             Posted on
-            <time itemprop="dateCreated" datetime="2015-11-29T16:45:23+08:00" content="2015-11-29">
-              2015-11-29
+            <time itemprop="dateCreated" datetime="2015-11-30T10:53:27+08:00" content="2015-11-30">
+              2015-11-30
             </time>
           </span>
 
@@ -327,10 +418,11 @@
 
       
         
-          <p>Just came across a styling problem on building a web page for a client. The situation is that I created a search box component in React with inline styles. This component contains a text input and a div styled as a push button. These two elements are supposed to be on the same line. See the below diagram.</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+-----------------+----------+&#10;|                 |  Check   |&#10;+-----------------+----------+</span><br></pre></td></tr></table></figure>
+          <p>Another email from my mate Chris regarding CSS, below are his simplified HTML and CSS snippets:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"push-button"</span>&gt;</span>Press me<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="id">#push-button</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">background</span>:<span class="value"> yellow</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">color</span>:<span class="value"> red</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">font-size</span>:<span class="value"> <span class="number">20px</span></span></span>;</span><br><span class="line">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">div</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">background</span>:<span class="value"> grey</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">border</span>:<span class="value"> <span class="number">2px</span> solid black</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/11/29/Quick-Note-Conditional-Style-in-IE10/#more" rel="contents">
+            <a class="btn" href="/2015/11/30/CSS-Specificity/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -373,8 +465,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/11/29/ReactJS-101/" itemprop="url">
-                  React 101
+                <a class="post-title-link" href="/2015/11/29/Quick-Note-Conditional-Style-in-IE10/" itemprop="url">
+                  Quick Note: Conditional Style in IE10+
                 </a>
               
             
@@ -384,7 +476,7 @@
         <div class="post-meta">
           <span class="post-time">
             Posted on
-            <time itemprop="dateCreated" datetime="2015-11-29T11:53:07+08:00" content="2015-11-29">
+            <time itemprop="dateCreated" datetime="2015-11-29T16:45:23+08:00" content="2015-11-29">
               2015-11-29
             </time>
           </span>
@@ -409,10 +501,10 @@
 
       
         
-          <p>Recently, I am working on a freelancing project to build a SPA. Since I have learnt React for a bit while, I decided to put it in use this time. For me, the two most significant benefits that React brings to us is (1) its performance – due to React’s virtual DOM and DOM diff mechanisms; and, (2) its way to wrap and abstract the (major) building blocks of a web app into components.</p>
-<p>For those who have yet to hear/learn React, here is a very quick and brief instruction/tutorial to guide you onto the track.</p>
+          <p>Just came across a styling problem on building a web page for a client. The situation is that I created a search box component in React with inline styles. This component contains a text input and a div styled as a push button. These two elements are supposed to be on the same line. See the below diagram.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+-----------------+----------+&#10;|                 |  Check   |&#10;+-----------------+----------+</span><br></pre></td></tr></table></figure>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/11/29/ReactJS-101/#more" rel="contents">
+            <a class="btn" href="/2015/11/29/Quick-Note-Conditional-Style-in-IE10/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -848,94 +940,12 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/01/27/javascript-promises-101/" itemprop="url">
-                  Javascript Promises 101
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            Posted on
-            <time itemprop="dateCreated" datetime="2014-01-27T14:19:00+08:00" content="2014-01-27">
-              2014-01-27
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>If you happened to learn or use Node.JS you should definitely heard about the word “Asynchronous”. This is extremely useful as in a single-thread environment just like Javascript we always want to ensure that our programs will not be blocked by any expensive procedures at run-time. For example, like consider the below code segment:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> sql = <span class="string">'SELECT name FROM users'</span>;</span><br><span class="line"><span class="keyword">var</span> users = query(database, sql); <span class="comment">// suppose query returns an array</span></span><br><span class="line"><span class="built_in">console</span>.log(users.length);</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/01/27/javascript-promises-101/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -976,7 +986,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-count">31</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
