@@ -209,6 +209,89 @@
             
               
                 
+                <a class="post-title-link" href="/2015/12/11/Get-Offset-values-in-Vanilla-JavaScript/" itemprop="url">
+                  Get Offset values in Vanilla JavaScript
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            Posted on
+            <time itemprop="dateCreated" datetime="2015-12-11T21:14:59+08:00" content="2015-12-11">
+              2015-12-11
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p>Recently, I am working on my “mock up” project to mock up some existing web sites/pages. Soon enough after I started, it became necessary for me to find a way to get the <code>offset</code> values of DOM elements without using jQuery.</p>
+<p>First off, I tried to directly use <code>.offsetTop</code>, however, it doesn’t return the decent value that I expect. After searching online, I realized that the <code>.offsetTop</code> is only the offset to the element’s parent node. In other words, to get the real offset (from the very top of the document), it needs to be calculated iteratively from the element to <code>document</code>.</p>
+<p>Below is a solution provided by <a href="http://stackoverflow.com/a/1045012" target="_blank" rel="external">SLaks</a> on StackOverflow.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">offset</span>(<span class="params">elem</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!elem) elem = <span class="keyword">this</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> x = elem.offsetLeft;</span><br><span class="line">    <span class="keyword">var</span> y = elem.offsetTop;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (elem = elem.offsetParent) &#123;</span><br><span class="line">        x += elem.offsetLeft;</span><br><span class="line">        y += elem.offsetTop;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123; left: x, top: y &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/12/02/A-JavaScript-Promise-Implementation/" itemprop="url">
                   A JavaScript Promise Implementation
                 </a>
@@ -944,87 +1027,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/11/25/My-Mac-OS-X-Setup-for-Web-Development/" itemprop="url">
-                  My Mac OS X Setup for Web Development
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            Posted on
-            <time itemprop="dateCreated" datetime="2015-11-25T21:00:13+08:00" content="2015-11-25">
-              2015-11-25
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>Yesterday I demonstrated the ways of building simple websites and creating more complex single-page-application (SPA) in the SSG Seasonal Research &amp; Tech Workshop. During and after the event, I was asked heavily about my setup for doing web development on my Macbook, so that I decided to write a post here to share my setup for web development on my Macbook.</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/11/25/My-Mac-OS-X-Setup-for-Web-Development/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1071,7 +1073,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">32</span>
+              <span class="site-state-item-count">33</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
