@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="SOA,report,web," />
+  <meta name="keywords" content="javascript,node.js," />
 
 
 
@@ -51,16 +51,16 @@
 
 
 
-<meta name="description" content="As an increasingly important area, Service-Oriented Architecture (SOA) has finally caught my eyes on it, although I did take a module about it during my MSc degree. It is really hard to say if I will">
+<meta name="description" content="Recently, the CSS Autoprefixer plugin on my Sublime Text stopped to work properly. After googling the symptom, I realized that it is time to get my Node.js upgraded. You can get this done with help of">
 <meta property="og:type" content="article">
-<meta property="og:title" content="WSDL2Java">
-<meta property="og:url" content="http://feifeihang.github.io/2012/04/06/wsdl2java/index.html">
+<meta property="og:title" content="Upgrade Node.js">
+<meta property="og:url" content="http://feifeihang.github.io/2015/12/25/Upgrade-Node-js/index.html">
 <meta property="og:site_name" content="FEIFEI HANG'S BLOG">
-<meta property="og:description" content="As an increasingly important area, Service-Oriented Architecture (SOA) has finally caught my eyes on it, although I did take a module about it during my MSc degree. It is really hard to say if I will">
-<meta property="og:updated_time" content="2015-11-25T11:37:29.000Z">
+<meta property="og:description" content="Recently, the CSS Autoprefixer plugin on my Sublime Text stopped to work properly. After googling the symptom, I realized that it is time to get my Node.js upgraded. You can get this done with help of">
+<meta property="og:updated_time" content="2015-12-25T06:17:24.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="WSDL2Java">
-<meta name="twitter:description" content="As an increasingly important area, Service-Oriented Architecture (SOA) has finally caught my eyes on it, although I did take a module about it during my MSc degree. It is really hard to say if I will">
+<meta name="twitter:title" content="Upgrade Node.js">
+<meta name="twitter:description" content="Recently, the CSS Autoprefixer plugin on my Sublime Text stopped to work properly. After googling the symptom, I realized that it is time to get my Node.js upgraded. You can get this done with help of">
 
 
 
@@ -72,7 +72,7 @@
   };
 </script>
 
-  <title> WSDL2Java | FEIFEI HANG'S BLOG </title>
+  <title> Upgrade Node.js | FEIFEI HANG'S BLOG </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -192,7 +192,7 @@
             
             
               
-                WSDL2Java
+                Upgrade Node.js
               
             
           </h1>
@@ -201,8 +201,8 @@
         <div class="post-meta">
           <span class="post-time">
             Posted on
-            <time itemprop="dateCreated" datetime="2012-04-06T15:02:00+08:00" content="2012-04-06">
-              2012-04-06
+            <time itemprop="dateCreated" datetime="2015-12-25T14:04:57+08:00" content="2015-12-25">
+              2015-12-25
             </time>
           </span>
 
@@ -225,18 +225,8 @@
       
 
       
-        <span itemprop="articleBody"><p>As an increasingly important area, Service-Oriented Architecture (SOA) has finally caught my eyes on it, although I did take a module about it during my MSc degree. It is really hard to say if I will learn to build my own Web Service in near future, but I do get lots of fun from “service composition”. For example, you can get cities’ name by using “Postcode – Location” converter, and then use them in a “Location – Weather” forecaster to get the weather forecasts. And the best thing is that you DO NOT need to do anything on building the “converter” or “forecaster”, because you can just directly use them since they are published as Web Services.</p>
-<a id="more"></a>
-<p>Indeed, before building service-oriented applications, we do need to learn a bit about SOA. Because I am not entirely familiar with SOA yet, it should be better if I just touch its surface here. </p>
-<p>Generally, each published web service is described by a WSDL file. WSDL stands for “Web Service Definition Language”, and it describes the information of the web service. Hence when you want to use an existing web service, you need to get its WSDL firstly. Normally, you can find WSDL file by simply adding “?WSDL” at end of web services’ URL. For example, if the web service is at “<a href="http://www.soa.com/service.asm”" target="_blank" rel="external">http://www.soa.com/service.asm”</a>, the WSDL file will be “<a href="http://www.soa.com/service.asm?WSDL”" target="_blank" rel="external">http://www.soa.com/service.asm?WSDL”</a>.</p>
-<p>Another important concept is SOAP. SOAP stands for “Simple Object Access Protocol”. As can be easily figured out form its name, SOAP is basically a protocol for object accesses and communications. At this time point, you just need to remember that we usually need SOAP for accessing web services.</p>
-<p>So far, we are almost there to build our service-oriented applications. But before that, there is one more step. If you prefer to develop applications in Java (just like me), you need to generate Java files of the web services from WSDL before building your very own one. I noticed that there are so many ways to generate Java from WSDL, especially when you using IDEs. However, because I prefer to use text-based Vim to develop applications, the following “WDSL2Java” command line is what I use frequently:</p>
-<p>wsimport</p>
-<p>Now, suppose that the WSDL is “<a href="http://www.soa.com/service.asm?WSDL”" target="_blank" rel="external">http://www.soa.com/service.asm?WSDL”</a>, then you just need:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsimport -keep -verbose http://www.soa.com/service.asm?WSDL</span><br></pre></td></tr></table></figure>
-<p>Now you can start to build your own service-oriented applications by using the generated Java classes from the desired WSDL. </p>
-<p>Cheers!!!</p>
-<p>Feifei</p>
+        <span itemprop="articleBody"><p>Recently, the CSS Autoprefixer plugin on my Sublime Text stopped to work properly. After googling the symptom, I realized that it is time to get my Node.js upgraded. You can get this done with help of NPM:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo npm <span class="operator"><span class="keyword">cache</span> clean -<span class="keyword">f</span></span><br><span class="line">sudo npm <span class="keyword">install</span> -<span class="keyword">g</span> <span class="keyword">n</span></span><br><span class="line">sudo <span class="keyword">n</span> stable</span></span><br></pre></td></tr></table></figure>
 </span>
       
     </div>
@@ -245,11 +235,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/SOA/" rel="tag">#SOA</a>
+            <a href="/tags/javascript/" rel="tag">#javascript</a>
           
-            <a href="/tags/report/" rel="tag">#report</a>
-          
-            <a href="/tags/web/" rel="tag">#web</a>
+            <a href="/tags/node-js/" rel="tag">#node.js</a>
           
         </div>
       
@@ -258,17 +246,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2012/04/06/anxious/" rel="next" title="Anxious">
-                <i class="fa fa-chevron-left"></i> Anxious
+              <a href="/2015/12/11/Get-Offset-values-in-Vanilla-JavaScript/" rel="next" title="Get Offset values in Vanilla JavaScript">
+                <i class="fa fa-chevron-left"></i> Get Offset values in Vanilla JavaScript
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2012/05/07/restful-web-services-overview/" rel="prev" title="RESTful Web Services Overview">
-                RESTful Web Services Overview <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
