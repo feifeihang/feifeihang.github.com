@@ -209,6 +209,88 @@
             
               
                 
+                <a class="post-title-link" href="/2015/12/26/JavaScript-Object-watch/" itemprop="url">
+                  JavaScript Object.watch
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            Posted on
+            <time itemprop="dateCreated" datetime="2015-12-26T22:26:18+08:00" content="2015-12-26">
+              2015-12-26
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p>The <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/observe" target="_blank" rel="external">Object.observe</a> and <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/watch" target="_blank" rel="external">Object.prototype.watch</a> have already been there for a while. However, there is still no common standards or whatsoever being applied and followed by all (most of) modern web browsers.</p>
+<p>These methods are pretty handy as they allow you to watch the changes of an object, and trigger a handling callback function. To make use of this brilliant concept in most browsers (for those who suppose ES5), I just wrote a Object.watch shim, you can find it at this <a href="https://gist.github.com/hufyhang/47b67113f048fe00b153" target="_blank" rel="external">GitHub Gist</a>.</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/12/25/Upgrade-Node-js/" itemprop="url">
                   Upgrade Node.js
                 </a>
@@ -940,89 +1022,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/11/26/JavaScript-setTimeout/" itemprop="url">
-                  JavaScript setTimeout
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            Posted on
-            <time itemprop="dateCreated" datetime="2015-11-26T14:34:43+08:00" content="2015-11-26">
-              2015-11-26
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <h3 id="The_Problem">The Problem</h3><p>Recently, I am working on a new website for a client. The client expects, in short, a postcode-based search box as one of the core features of the new landing page. Since it is postcode based, the design decision is that the strings (i.e. postcodes) entered by users should be, ideally, always in upper case automatically.</p>
-<p>This task sounds pretty easy and straight forward, most people, including myself, will simply code like this:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=<span class="string">"text"</span> id=<span class="string">"postcode"</span> /&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript"></span><br><span class="line">    <span class="keyword">var</span> input = <span class="built_in">document</span>.getElementById(<span class="string">'postcode'</span>);</span><br><span class="line">    input.addEventListner(<span class="string">'keypress'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">evt</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.value = <span class="keyword">this</span>.value.toUpperCase();</span><br><span class="line">    &#125;);</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/11/26/JavaScript-setTimeout/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1069,7 +1068,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">34</span>
+              <span class="site-state-item-count">35</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>

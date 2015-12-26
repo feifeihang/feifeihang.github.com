@@ -51,16 +51,16 @@
 
 
 
-<meta name="description" content="The ProblemRecently, I am working on a new website for a client. The client expects, in short, a postcode-based search box as one of the core features of the new landing page. Since it is postcode bas">
+<meta name="description" content="The Object.observe and Object.prototype.watch have already been there for a while. However, there is still no common standards or whatsoever being applied and followed by all (most of) modern web brow">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript setTimeout">
-<meta property="og:url" content="http://feifeihang.github.io/2015/11/26/JavaScript-setTimeout/index.html">
+<meta property="og:title" content="JavaScript Object.watch">
+<meta property="og:url" content="http://feifeihang.github.io/2015/12/26/JavaScript-Object-watch/index.html">
 <meta property="og:site_name" content="FEIFEI HANG'S BLOG">
-<meta property="og:description" content="The ProblemRecently, I am working on a new website for a client. The client expects, in short, a postcode-based search box as one of the core features of the new landing page. Since it is postcode bas">
-<meta property="og:updated_time" content="2015-11-26T10:43:20.000Z">
+<meta property="og:description" content="The Object.observe and Object.prototype.watch have already been there for a while. However, there is still no common standards or whatsoever being applied and followed by all (most of) modern web brow">
+<meta property="og:updated_time" content="2015-12-26T14:32:25.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JavaScript setTimeout">
-<meta name="twitter:description" content="The ProblemRecently, I am working on a new website for a client. The client expects, in short, a postcode-based search box as one of the core features of the new landing page. Since it is postcode bas">
+<meta name="twitter:title" content="JavaScript Object.watch">
+<meta name="twitter:description" content="The Object.observe and Object.prototype.watch have already been there for a while. However, there is still no common standards or whatsoever being applied and followed by all (most of) modern web brow">
 
 
 
@@ -72,7 +72,7 @@
   };
 </script>
 
-  <title> JavaScript setTimeout | FEIFEI HANG'S BLOG </title>
+  <title> JavaScript Object.watch | FEIFEI HANG'S BLOG </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -192,7 +192,7 @@
             
             
               
-                JavaScript setTimeout
+                JavaScript Object.watch
               
             
           </h1>
@@ -201,8 +201,8 @@
         <div class="post-meta">
           <span class="post-time">
             Posted on
-            <time itemprop="dateCreated" datetime="2015-11-26T14:34:43+08:00" content="2015-11-26">
-              2015-11-26
+            <time itemprop="dateCreated" datetime="2015-12-26T22:26:18+08:00" content="2015-12-26">
+              2015-12-26
             </time>
           </span>
 
@@ -225,23 +225,8 @@
       
 
       
-        <span itemprop="articleBody"><h3 id="The_Problem">The Problem</h3><p>Recently, I am working on a new website for a client. The client expects, in short, a postcode-based search box as one of the core features of the new landing page. Since it is postcode based, the design decision is that the strings (i.e. postcodes) entered by users should be, ideally, always in upper case automatically.</p>
-<p>This task sounds pretty easy and straight forward, most people, including myself, will simply code like this:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=<span class="string">"text"</span> id=<span class="string">"postcode"</span> /&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript"></span><br><span class="line">    <span class="keyword">var</span> input = <span class="built_in">document</span>.getElementById(<span class="string">'postcode'</span>);</span><br><span class="line">    input.addEventListner(<span class="string">'keypress'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">evt</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.value = <span class="keyword">this</span>.value.toUpperCase();</span><br><span class="line">    &#125;);</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<p>However, if you test the above code, you will realize that it does not take any effect. The season is that when <code>this.value = this.value.toUpperCase();</code> is being executed, the value of the postcode input has not been changed yet.</p>
-<p>Therefore, a dummy solution shown in the following code snippet seems solved the problem.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=<span class="string">"text"</span> id=<span class="string">"postcode"</span> /&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript"></span><br><span class="line">    <span class="keyword">var</span> input = <span class="built_in">document</span>.getElementById(<span class="string">'postcode'</span>);</span><br><span class="line">    input.addEventListner(<span class="string">'keyup'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">evt</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.value = <span class="keyword">this</span>.value.toUpperCase();</span><br><span class="line">    &#125;);</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-<p>To be more nitpicking, you may notice the <strong>“visible”</strong> transform of lower case to upper case once you adopt the above solution. For me, it just looks clumsy and silly.</p>
-<h3 id="setTimeout_to_the_Rescue">setTimeout to the Rescue</h3><p>Basically, what we really like to see is a procedure like this:</p>
-<p>enter postcode -&gt; update input value -&gt; get current input value -&gt; toUpperCase -&gt; update UI</p>
-<p>Fortunately, a <code>setTimeout</code> trick, see the code blow, can get the above procedure easily implemented.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=<span class="string">"text"</span> id=<span class="string">"postcode"</span> /&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript"></span><br><span class="line">    <span class="keyword">var</span> input = <span class="built_in">document</span>.getElementById(<span class="string">'postcode'</span>);</span><br><span class="line">    input.addEventListner(<span class="string">'keypress'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">evt</span>) </span>&#123;</span><br><span class="line">        setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                <span class="keyword">this</span>.value = <span class="keyword">this</span>.value.toUpperCase();</span><br><span class="line">            &#125;.bind(<span class="keyword">this</span>), <span class="number">0</span>);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-<p>Notice the second parameter <code>0</code> to <code>setTiemout</code>. This trick sequentially does the following magics:</p>
-<ol>
-<li>Pushes the anonymous callback function to the callback queue.</li>
-<li>Once the current execution stack is empty, the early queued callback function will get executed <del>immediately</del> pretty soon.</li>
-</ol>
+        <span itemprop="articleBody"><p>The <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/observe" target="_blank" rel="external">Object.observe</a> and <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/watch" target="_blank" rel="external">Object.prototype.watch</a> have already been there for a while. However, there is still no common standards or whatsoever being applied and followed by all (most of) modern web browsers.</p>
+<p>These methods are pretty handy as they allow you to watch the changes of an object, and trigger a handling callback function. To make use of this brilliant concept in most browsers (for those who suppose ES5), I just wrote a Object.watch shim, you can find it at this <a href="https://gist.github.com/hufyhang/47b67113f048fe00b153" target="_blank" rel="external">GitHub Gist</a>.</p>
 </span>
       
     </div>
@@ -259,17 +244,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/11/26/JavaScript-Closures/" rel="next" title="JavaScript Closures">
-                <i class="fa fa-chevron-left"></i> JavaScript Closures
+              <a href="/2015/12/25/Upgrade-Node-js/" rel="next" title="Upgrade Node.js">
+                <i class="fa fa-chevron-left"></i> Upgrade Node.js
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/11/27/DOM-Event-Capture-and-Bubbling/" rel="prev" title="DOM Event Capture and Bubbling">
-                DOM Event Capture and Bubbling <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -401,7 +382,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#The_Problem"><span class="nav-number">1.</span> <span class="nav-text">The Problem</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#setTimeout_to_the_Rescue"><span class="nav-number">2.</span> <span class="nav-text">setTimeout to the Rescue</span></a></li></ol></div>
+              <p class="post-toc-empty">This post does not have a Table Of Contents</p>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
