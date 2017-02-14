@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="report," />
+  <meta name="keywords" content="javascript, functional," />
 
 
 
@@ -51,19 +51,16 @@
 
 
 
-<meta name="description" content="Here goes another newly written proposal on Service Compsosition in an HTML5-based end-user development context.
-An HTML5-based Service Composition Approach for End-User Development">
+<meta name="description" content="It has been so long since my last post, and the past year (2016) was quite fruitful and meaningful. Long story short, I’m now working at a start-up and in the middle of pursuit of our dream with my fo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="An HTML5-based Service Composition Approach for End-User Development">
-<meta property="og:url" content="http://feifeihang.github.io/2012/08/27/an-html5-based-service-composition-approach-for-end-user-development/index.html">
+<meta property="og:title" content="Towards Functional JavaScript">
+<meta property="og:url" content="http://feifeihang.github.io/2017/02/14/Towards-Functional-JavaScript/index.html">
 <meta property="og:site_name" content="FEIFEI HANG'S BLOG">
-<meta property="og:description" content="Here goes another newly written proposal on Service Compsosition in an HTML5-based end-user development context.
-An HTML5-based Service Composition Approach for End-User Development">
-<meta property="og:updated_time" content="2015-11-25T11:37:45.000Z">
+<meta property="og:description" content="It has been so long since my last post, and the past year (2016) was quite fruitful and meaningful. Long story short, I’m now working at a start-up and in the middle of pursuit of our dream with my fo">
+<meta property="og:updated_time" content="2017-02-14T03:39:24.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="An HTML5-based Service Composition Approach for End-User Development">
-<meta name="twitter:description" content="Here goes another newly written proposal on Service Compsosition in an HTML5-based end-user development context.
-An HTML5-based Service Composition Approach for End-User Development">
+<meta name="twitter:title" content="Towards Functional JavaScript">
+<meta name="twitter:description" content="It has been so long since my last post, and the past year (2016) was quite fruitful and meaningful. Long story short, I’m now working at a start-up and in the middle of pursuit of our dream with my fo">
 
 
 
@@ -75,7 +72,7 @@ An HTML5-based Service Composition Approach for End-User Development">
   };
 </script>
 
-  <title> An HTML5-based Service Composition Approach for End-User Development | FEIFEI HANG'S BLOG </title>
+  <title> Towards Functional JavaScript | FEIFEI HANG'S BLOG </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -195,7 +192,7 @@ An HTML5-based Service Composition Approach for End-User Development">
             
             
               
-                An HTML5-based Service Composition Approach for End-User Development
+                Towards Functional JavaScript
               
             
           </h1>
@@ -204,8 +201,8 @@ An HTML5-based Service Composition Approach for End-User Development">
         <div class="post-meta">
           <span class="post-time">
             Posted on
-            <time itemprop="dateCreated" datetime="2012-08-27T18:37:00+08:00" content="2012-08-27">
-              2012-08-27
+            <time itemprop="dateCreated" datetime="2017-02-14T10:58:12+08:00" content="2017-02-14">
+              2017-02-14
             </time>
           </span>
 
@@ -228,8 +225,24 @@ An HTML5-based Service Composition Approach for End-User Development">
       
 
       
-        <span itemprop="articleBody"><p>Here goes another newly written proposal on Service Compsosition in an HTML5-based end-user development context.</p>
-<p><a href="http://feifeihang.github.com/files/HTML5_based_EUD.pdf" target="_blank" rel="external">An HTML5-based Service Composition Approach for End-User Development</a></p>
+        <span itemprop="articleBody"><p>It has been so long since my last post, and the past year (2016) was quite fruitful and meaningful. Long story short, I’m now working at a start-up and in the middle of pursuit of our dream with my folks.</p>
+<p>Recently I spent a while on learning functional programming with JavaScript and am attempting to adopt this paradigm in our development.</p>
+<p>I won’t go through the questions of what functional programming is and how code can be written functionally as there are already tons of resources addressing there questions out there. Yet, I’m gonna briefly present what I’ve learnt from building the basic functional JS library for our main product.</p>
+<a id="more"></a>
+<p>The main drives of applying functional programming in our product involves:</p>
+<ol>
+<li>To make front-end codes as unit testable as possible.</li>
+<li>To maximise the reusability of functions.</li>
+</ol>
+<p>Very often you will realise your codes are hardly to be unit tested when functions relying too many external states or variables. Consider the below code:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> exampleFunction = <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> input = $(<span class="string">'#foo'</span>).val();</span><br><span class="line">  <span class="keyword">var</span> type = $(<span class="string">'#bar'</span>).val();</span><br><span class="line">  <span class="keyword">if</span> (input !== <span class="string">''</span> &amp;&amp; type === <span class="string">'qaz'</span>) &#123;</span><br><span class="line">    $(<span class="string">'#output'</span>).val(data);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>If you wanna unit test the output of <code>exampleFunction</code>, a couple of DOM elements have to be created. In other words, you will be distracted by tons of DOM-related logics and prerequisites. Plus, the reusability of this function is significantly poor.</p>
+<p>With functional programming, this function can be refactored as:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> exampleFunction = <span class="function"><span class="keyword">function</span> (<span class="params">data, input, type</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> input !== <span class="string">''</span> &amp;&amp; type === <span class="string">'qaz'</span> ? data : <span class="literal">undefined</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> fireIt = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> input = $(<span class="string">'#foo'</span>).val();</span><br><span class="line">  <span class="keyword">var</span> type = $(<span class="string">'#bar'</span>).val();</span><br><span class="line">  <span class="keyword">var</span> output = exampleFunction(<span class="string">'testing'</span>, input, type);</span><br><span class="line">  $(<span class="string">'#output'</span>).val(output);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>And now <code>exampleFunction</code> is unit testable and reusable.</p>
+<p>However, you will notice that <code>fireIt</code> does not follow the rule of functional programming as it returns nothing (no explicit return values), and it relies on external states, i.e. elements <code>#foo</code>, <code>#bar</code>, and <code>#output</code>. I would say when doing front-end development, it is nearly impossible to make your JS functions completely pure (otherwise there’s no needs to use JS, right?). You have to change the state of your DOM, or maybe fire an AJAX, or do some fancy things else. The key is to treat functional programming as a tool rather than a rule. Ask yourself “Do I wanna reuse this function somewhere else?”, “Is this function doing some data manipulations?”, if the answers are true, making them pure and functional may be a good idea.</p>
+<p><em>Embrace functional programming, but don’t let it limit yourself.</em></p>
+<p>Here is a open source library I put on <a href="https://github.com/hufyhang/funjs" target="_blank" rel="external">GitHub</a>. It is in its super early stage, but is fully functional (by functional, I mean it works). It’s written in CoffeeScript, and I hope you could understand Chinese. :-)</p>
 </span>
       
     </div>
@@ -238,7 +251,7 @@ An HTML5-based Service Composition Approach for End-User Development">
       
         <div class="post-tags">
           
-            <a href="/tags/report/" rel="tag">#report</a>
+            <a href="/tags/javascript-functional/" rel="tag">#javascript, functional</a>
           
         </div>
       
@@ -247,17 +260,13 @@ An HTML5-based Service Composition Approach for End-User Development">
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2012/06/29/a-brief-survey-on-the-state-of-the-art-of-software-engineering-in-industry/" rel="next" title="A Brief Survey on the State of the Art of Software Engineering in Industry">
-                <i class="fa fa-chevron-left"></i> A Brief Survey on the State of the Art of Software Engineering in Industry
+              <a href="/2015/12/26/JavaScript-Object-watch/" rel="next" title="JavaScript Object.watch">
+                <i class="fa fa-chevron-left"></i> JavaScript Object.watch
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2014/01/25/web-service-2-dot-0/" rel="prev" title="Web Service 2.0">
-                Web Service 2.0 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
